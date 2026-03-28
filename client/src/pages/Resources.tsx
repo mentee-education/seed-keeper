@@ -237,7 +237,7 @@ export default function Resources() {
               placeholder="Search resources..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-terracotta/30 focus:border-terracotta/50 transition-all"
+              className="w-full pl-9 pr-8 py-2.5 bg-card border border-border rounded-lg text-sm md:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-terracotta/30 focus:border-terracotta/50 transition-all"
             />
             {searchQuery && (
               <button
@@ -252,7 +252,7 @@ export default function Resources() {
 
         {/* Category Pills — dynamic, only show categories with results */}
         <div className="container pb-3">
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2 xl:grid xl:grid-cols-4 xl:gap-2">
             <CategoryPill
               active={selectedCategory === "All"}
               onClick={() => setSelectedCategory("All")}
