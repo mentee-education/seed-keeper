@@ -5,7 +5,7 @@
   dynamic filters — options with zero results are hidden
 */
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
-import { Search, X, ChevronDown, LayoutList, LayoutGrid } from "lucide-react";
+import { Search, X, ChevronDown, LayoutList, LayoutGrid, SlidersHorizontal } from "lucide-react";
 import { motion } from "framer-motion";
 import Fuse from "fuse.js";
 import Navbar from "@/components/Navbar";
@@ -51,6 +51,7 @@ export default function Resources() {
   const [selectedAudience, setSelectedAudience] = useState("All");
   const [sortBy, setSortBy] = useState<SortOption>("title-asc");
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -235,7 +236,25 @@ export default function Resources() {
       {/* Category tiles — image cards that filter the library */}
       <section className="bg-cream border-b border-border">
         <div className="container py-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2">
+          {/* Mobile: compact category dropdown instead of the tile grid */}
+          <div className="relative sm:hidden">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value as Category | "All")}
+              className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-2 text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
+                selectedCategory !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
+              }`}
+            >
+              <option value="All">All Categories ({categoryCounts["All"]})</option>
+              {CATEGORIES.map((cat) => (
+                <option key={cat.name} value={cat.name}>
+                  {cat.name} ({categoryCounts[cat.name] || 0})
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+          </div>
+          <div className="hidden sm:grid sm:grid-cols-4 xl:grid-cols-8 gap-2">
             <button
               onClick={() => setSelectedCategory("All")}
               className={`relative rounded-lg overflow-hidden group text-left h-28 transition-all ${
@@ -278,8 +297,24 @@ export default function Resources() {
       {/* Sticky Filter Bar */}
       <div className="sticky top-[72px] md:top-[92px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
         {/* Search Row */}
-        <div className="container py-3">
-          <div className="relative">
+        <div className="container py-3 flex items-center gap-2">
+          {/* Mobile filters toggle */}
+          <button
+            onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+            className={`md:hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-2.5 rounded-lg border text-xs font-medium transition-colors ${
+              mobileFiltersOpen || activeFilterCount > 0
+                ? "bg-terracotta/5 border-terracotta/30 text-terracotta"
+                : "bg-card border-border text-muted-foreground"
+            }`}
+            aria-expanded={mobileFiltersOpen}
+          >
+            <SlidersHorizontal size={14} />
+            Filters
+            {activeFilterCount > 0 && (
+              <span className="bg-terracotta text-white rounded-full px-1.5 py-px text-[0.6rem]">{activeFilterCount}</span>
+            )}
+          </button>
+          <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
             <input
               type="text"
@@ -299,8 +334,8 @@ export default function Resources() {
           </div>
         </div>
 
-        {/* Always-Visible Filter Dropdowns — only show filters that have >1 option */}
-        <div className="border-t border-border/50">
+        {/* Filter dropdowns — always visible on desktop, behind the Filters toggle on mobile */}
+        <div className={`${mobileFiltersOpen ? "block" : "hidden"} md:block border-t border-border/50`}>
           <div className="container py-2.5">
             <div className="flex flex-wrap items-end justify-center gap-2 md:gap-3">
               {availableGrades.length > 1 && (
