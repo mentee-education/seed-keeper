@@ -236,23 +236,43 @@ export default function Resources() {
       {/* Category tiles — image cards that filter the library */}
       <section className="bg-cream border-b border-border">
         <div className="container py-4">
-          {/* Mobile: compact category dropdown instead of the tile grid */}
-          <div className="relative sm:hidden">
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value as Category | "All")}
-              className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-2 text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
-                selectedCategory !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
-              }`}
-            >
-              <option value="All">All Categories ({categoryCounts["All"]})</option>
-              {CATEGORIES.map((cat) => (
-                <option key={cat.name} value={cat.name}>
-                  {cat.name} ({categoryCounts[cat.name] || 0})
-                </option>
-              ))}
-            </select>
-            <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+          {/* Mobile: compact category dropdown + always-visible view toggle */}
+          <div className="flex items-center gap-2 sm:hidden">
+            <div className="relative flex-1 min-w-0">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value as Category | "All")}
+                className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-2 text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
+                  selectedCategory !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
+                }`}
+              >
+                <option value="All">All Categories ({categoryCounts["All"]})</option>
+                {CATEGORIES.map((cat) => (
+                  <option key={cat.name} value={cat.name}>
+                    {cat.name} ({categoryCounts[cat.name] || 0})
+                  </option>
+                ))}
+              </select>
+              <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+            </div>
+            <div className="flex border border-border rounded-lg overflow-hidden shrink-0">
+              <button
+                onClick={() => setViewMode("list")}
+                className={`p-2 transition-colors ${viewMode === "list" ? "bg-terracotta text-white" : "bg-card text-muted-foreground"}`}
+                title="List view"
+                aria-label="List view"
+              >
+                <LayoutList size={15} />
+              </button>
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`p-2 transition-colors ${viewMode === "grid" ? "bg-terracotta text-white" : "bg-card text-muted-foreground"}`}
+                title="Grid view"
+                aria-label="Grid view"
+              >
+                <LayoutGrid size={15} />
+              </button>
+            </div>
           </div>
           <div className="hidden sm:grid sm:grid-cols-4 xl:grid-cols-8 gap-2">
             <button
@@ -388,8 +408,8 @@ export default function Resources() {
                   relevance: "Relevance",
                 }}
               />
-              {/* View Toggle */}
-              <div className="flex flex-col gap-0.5">
+              {/* View Toggle — desktop only; mobile has one beside the category dropdown */}
+              <div className="hidden md:flex flex-col gap-0.5">
                 <label className="text-[0.55rem] font-semibold uppercase tracking-widest text-muted-foreground/70 text-center">View</label>
                 <div className="flex border border-border rounded-lg overflow-hidden">
                   <button
