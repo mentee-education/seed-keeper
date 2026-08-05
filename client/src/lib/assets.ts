@@ -16,7 +16,7 @@ export const IMAGES = {
   catPedagogy: `${R2}/cat-pedagogy.jpg`,
   catCurriculum: `${R2}/cat-curriculum.jpg`,
   catLiterature: `${R2}/cat-literature.jpg`,
-  aboutHero: `${R2}/about-hero.jpg`,
+  aboutHero: `${R2}/about-hero-right.jpg`,
   resourcesHeader: `${R2}/resources-header.jpg`,
 } as const;
 

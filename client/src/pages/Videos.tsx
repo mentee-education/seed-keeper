@@ -6,7 +6,7 @@
 */
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { resources, getCategoryColor, GRADE_LEVELS, type Resource } from "@/data/resources";
@@ -121,39 +121,31 @@ export default function Videos() {
 
       {/* Filters */}
       <div className="sticky top-[72px] md:top-[92px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container py-3.5 flex flex-wrap items-end gap-x-6 gap-y-3">
-          <div>
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-1.5">
+        <div className="container py-4 flex flex-wrap items-start justify-between gap-x-8 gap-y-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-2">
               Topic
             </p>
-            <div className="flex flex-wrap gap-1.5">
-              <button
-                onClick={() => setCategory("All")}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  category === "All"
-                    ? "bg-terracotta text-white shadow-sm"
-                    : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-terracotta/40 hover:bg-terracotta/5"
-                }`}
-              >
-                All
-                <span className={`ml-1.5 ${category === "All" ? "text-white/70" : "text-muted-foreground/50"}`}>
-                  {allVideos.length}
-                </span>
-              </button>
-              {categories.map((c) => {
-                const n = allVideos.filter((v) => v.category === c).length;
+            <div className="flex flex-wrap gap-2">
+              {["All", ...categories].map((c) => {
+                const n = c === "All" ? allVideos.length : allVideos.filter((v) => v.category === c).length;
+                const active = category === c;
                 return (
                   <button
                     key={c}
-                    onClick={() => setCategory(category === c ? "All" : c)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      category === c
-                        ? "bg-terracotta text-white shadow-sm"
+                    onClick={() => setCategory(active && c !== "All" ? "All" : c)}
+                    className={`inline-flex items-center gap-2 pl-3.5 pr-2 py-1.5 rounded-full text-xs font-medium transition-all ${
+                      active
+                        ? "bg-terracotta text-white shadow-sm ring-1 ring-terracotta"
                         : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-terracotta/40 hover:bg-terracotta/5"
                     }`}
                   >
-                    {c}
-                    <span className={`ml-1.5 ${category === c ? "text-white/70" : "text-muted-foreground/50"}`}>
+                    {c === "All" ? "All Topics" : c}
+                    <span
+                      className={`min-w-[1.35rem] text-center px-1.5 py-px rounded-full text-[0.65rem] tabular-nums ${
+                        active ? "bg-white/20 text-white" : "bg-sand text-soil/70"
+                      }`}
+                    >
                       {n}
                     </span>
                   </button>
@@ -161,22 +153,30 @@ export default function Videos() {
               })}
             </div>
           </div>
-          <div className="ml-auto">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-1.5">
+          <div className="shrink-0">
+            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-2">
               Grade Level
             </p>
-            <select
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-              className={`appearance-none border rounded-lg px-3 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
-                grade !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
-              }`}
-            >
-              <option value="All">All Grades</option>
-              {grades.map((g) => (
-                <option key={g} value={g}>Grades {g}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                className={`appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 transition-all ${
+                  grade !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground hover:border-terracotta/40"
+                }`}
+              >
+                <option value="All">All Grades</option>
+                {grades.map((g) => (
+                  <option key={g} value={g}>Grades {g}</option>
+                ))}
+              </select>
+              <ChevronDown
+                size={13}
+                className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 ${
+                  grade !== "All" ? "text-terracotta" : "text-muted-foreground"
+                }`}
+              />
+            </div>
           </div>
         </div>
       </div>

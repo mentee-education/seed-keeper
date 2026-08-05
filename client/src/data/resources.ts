@@ -425,8 +425,8 @@ export const resources: Resource[
   },
 {
     id: "fs-28",
-    title: "USDA Indigenous Food Sovereignty Initiative Fact Sheet",
-    url: "https://drive.google.com/file/d/1MgCJ_7RUXbnaSUesJM5jN59ezDOpGEpq/view?usp=sharing",
+    title: "USDA Indigenous Food Sovereignty Initiative",
+    url: "https://www.usda.gov/about-usda/general-information/staff-offices/office-tribal-relations/programs-and-services/usda-indigenous-food-sovereignty-initiative",
     organization: "U.S. Department of Agriculture",
     summary: "This fact sheet provides an overview of the USDA's Indigenous Food Sovereignty Initiative. It highlights the benefits of Indigenous foods, recent USDA investments in food sovereignty, and key partners.",
     category: "Food Systems",
@@ -439,7 +439,7 @@ export const resources: Resource[
   },
 {
     id: "ws-3",
-    title: "Earth’s Freshwater: A Guide for Teaching Freshwater in Grades 3 to 8",
+    title: "Water Rights and Human Communities — Earth’s Freshwater Teaching Guide, Ch. 6",
     url: "https://images.nationalgeographic.org/image/upload/v1645697082/EducationHub/files/chapter-6-water-rights-and-conflict.pdf",
     organization: "National Geographic",
     summary: "This guide provides resources and activities for teaching about freshwater in grades 3-8. Chapter 6, 'Water Rights and Human Communities,' delves into the political and social issues related to freshwater, such as supply and demand, water rights, and public-health concerns.",
@@ -888,10 +888,10 @@ export const resources: Resource[
   },
 {
     id: "es-16",
-    title: "Solar Energy Education: AISES STEM Resources",
+    title: "AISES: Advancing Indigenous People in STEM",
     url: "https://www.aises.org/",
     organization: "American Indian Science and Engineering Society",
-    summary: "STEM education resources from AISES connecting Indigenous knowledge with modern renewable energy technologies, including solar energy curriculum materials for K-12 classrooms.",
+    summary: "The national organization advancing Indigenous people in science, engineering, and technology — with student programs, scholarships, and educator resources that connect Indigenous knowledge with modern STEM fields, including renewable energy.",
     category: "Energy Systems",
     gradeLevel: "All",
     subject: "Science",
@@ -1002,8 +1002,8 @@ export const resources: Resource[
     id: "ask-3",
     title: "Ancient Astronomy: Native American Star Stories",
     url: "https://illuminative.org/wp-content/uploads/2022/06/Activity-4.3-5.NIEA-Illuminative_Ancient-Astronomy-Native-American-Star-Stories.Final_.pdf",
-    organization: "Illuminative / NIEA",
-    summary: "Activity featuring several star stories from different tribes as well as a map to study the stars in the night sky. After completing the activity, young people can practice being their own traditional astronomer.",
+    organization: "IllumiNative and National Indian Education Association",
+    summary: "A Grades 3-5 activity where students compare Mohawk, Cheyenne, Paiute, and Iroquois star stories with Greek constellation legends and use a star chart to find the Bear constellations, then practice being their own traditional astronomer.",
     category: "Astronomy and Sky Knowledge",
     gradeLevel: "4-6",
     subject: "Science",
@@ -1491,8 +1491,8 @@ export const resources: Resource[
 {
     id: "ltl-2",
     title: "A Broken Flute: The Native Experience in Books for Children",
-    url: "https://guides.library.ualberta.ca/c.php?g=744145&p=5383736",
-    organization: "University of Alberta Libraries",
+    url: "https://www.goodreads.com/book/show/2967826-a-broken-flute",
+    organization: "Doris Seale & Beverly Slapin (Oyate / AltaMira Press)",
     summary: "An annotated bibliography of the Native experience in children's books. This guide helps educators select authentic and respectful literature for their classrooms.",
     category: "Learning Through Literature",
     gradeLevel: "All",
@@ -1575,7 +1575,7 @@ export const resources: Resource[
 {
     id: "ltl-9",
     title: "Firekeeper's Daughter",
-    url: "https://www.goodreads.com/book/show/52346381-firekeeper-s-daughter",
+    url: "https://www.goodreads.com/book/show/52346471-firekeeper-s-daughter",
     organization: "Angeline Boulley",
     summary: "A groundbreaking YA thriller about a Native teen who must root out the corruption in her community. The book has been praised for its authentic representation of Ojibwe culture and its exploration of complex themes such as identity, community, and justice.",
     category: "Learning Through Literature",
@@ -1602,9 +1602,9 @@ export const resources: Resource[
   },
 {
     id: "ltl-11",
-    title: "Fry Bread: A Native American Family Tradition",
-    url: "https://cynthialeitichsmith.com/2020/04/home-classroom-teaching-native-american-childrens-teens-books-resources/",
-    organization: "Cynthia Leitich Smith",
+    title: "Fry Bread: A Native American Family Story",
+    url: "https://birchbarkbooks.com/products/fry-bread",
+    organization: "Kevin Noble Maillard, ill. Juana Martinez-Neal",
     summary: "A picture book that tells the story of fry bread, a staple food for many Native American families. The book explores the history and cultural significance of fry bread, and includes a recipe.",
     category: "Learning Through Literature",
     gradeLevel: "Pre-K to 3",
@@ -2661,20 +2661,6 @@ export const resources: Resource[
     seasonal: "",
     focusArea: "Moon stories, thirteen moons"
   },
-{
-    id: "ask-33",
-    title: "Ancient Astronomy: Native American Star Stories",
-    url: "https://illuminative.org/wp-content/uploads/2022/06/Activity-4.3-5.NIEA-Illuminative_Ancient-Astronomy-Native-American-Star-Stories.Final_.pdf",
-    organization: "IllumiNative and National Indian Education Association",
-    summary: "A Grades 3-5 activity where students compare Mohawk, Cheyenne, Paiute, and Iroquois star stories with Greek constellation legends and use a star chart to find the Bear constellations.",
-    category: "Astronomy and Sky Knowledge",
-    gradeLevel: "4-6",
-    subject: "Science",
-    audience: "Both",
-    resourceType: "Lesson Plan",
-    seasonal: "",
-    focusArea: "Constellation star stories"
-  }
 ];
 
 export function getCategoryColor(category: Category): string {
