@@ -276,7 +276,7 @@ export default function Resources() {
       </section>
 
       {/* Sticky Filter Bar */}
-      <div className="sticky top-16 md:top-[72px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
+      <div className="sticky top-[72px] md:top-[92px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
         {/* Search Row */}
         <div className="container py-3">
           <div className="relative">

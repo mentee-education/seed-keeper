@@ -129,17 +129,17 @@ export default function Videos() {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
 
-      {/* Cinematic header — deep soil, no photo, golden accents */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-soil via-[oklch(0.26_0.05_50)] to-[oklch(0.22_0.04_60)]">
+      {/* Header — light, consistent with the rest of the site */}
+      <section className="relative overflow-hidden bg-sand border-b border-border">
         <div className="grain" />
-        <div className="relative container py-14 md:py-20">
-          <p className="text-golden text-sm font-semibold uppercase tracking-[0.2em] mb-3">
+        <div className="relative container py-12 md:py-16">
+          <p className="text-terracotta text-sm font-semibold uppercase tracking-[0.2em] mb-3">
             Video Library
           </p>
-          <h1 className="font-serif text-3xl md:text-5xl text-cream mb-3 drop-shadow-md">
+          <h1 className="font-serif text-3xl md:text-5xl text-foreground mb-3">
             Watch &amp; Learn
           </h1>
-          <p className="text-cream/75 max-w-2xl leading-relaxed text-sm md:text-base">
+          <p className="text-muted-foreground max-w-2xl leading-relaxed text-sm md:text-base">
             {videos.length} classroom-ready films and series on Indigenous foodways,
             water, identity, and storytelling — from PBS LearningMedia and community
             filmmakers.

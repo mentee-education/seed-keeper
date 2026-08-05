@@ -56,26 +56,97 @@ const blocks = src
 console.log(`Parsed ${blocks.length} resources from resources.ts`);
 
 // ── Prompt construction ───────────────────────────────────────────────────────
+// Several distinct scenes per category + rotating light/composition, so
+// same-category thumbnails read as a varied real photo library, not renders.
 const SCENES = {
-  "Food Systems": "a thriving Indigenous Three Sisters garden — corn, beans and squash — heritage seeds, traditional foods, garden beds, or desert farmland",
-  "Water Systems": "a desert river, irrigation acequia, a clear flowing stream, monsoon rain over mesas, or still water reflecting the sky",
-  "Energy Systems": "solar panels above desert crops (agrivoltaics), golden sunlight on renewable energy infrastructure in Southwest tribal landscapes",
-  "Astronomy & Sky Knowledge": "a brilliant night sky over desert mesas — the Milky Way, constellations, or a glowing campfire under the stars",
-  "Indigenous Pedagogy": "an empty outdoor learning place on desert land — a brush ramada, a circle of log benches by a garden, a winding trail through sage, teaching materials on a woven blanket",
-  "Curriculum & Standards": "a warm teacher's workspace — printed lesson plans, woven textiles, natural materials, cornmeal and seeds arranged on a wooden desk",
-  "Learning Through Literature": "beautifully bound books, an open illustrated book with Southwest desert motifs, warm lamplight, woven textiles",
+  "Food Systems": [
+    "rows of heritage corn in a working desert field, drip irrigation line visible",
+    "a wooden crate of freshly harvested squash and beans on red earth",
+    "close detail of multicolored heritage corn kernels drying on a rack",
+    "raised garden beds with young bean and squash plants, adobe wall behind",
+    "wild desert food plants — prickly pear fruit, mesquite pods — growing naturally",
+  ],
+  "Water Systems": [
+    "a shallow desert creek running over gravel, cottonwoods on the bank",
+    "an irrigation acequia channel carrying water through farmland",
+    "monsoon clouds building over dry rangeland, first rain visible in the distance",
+    "a river winding through a canyon seen from the rim",
+    "water sampling bottles and field notebook on a rock beside a stream",
+  ],
+  "Energy Systems": [
+    "solar panels mounted above rows of crops on a working farm",
+    "a small off-grid solar array beside a rural home, mountains behind",
+    "detail of a solar panel surface reflecting clouds",
+    "power lines and a wind turbine on open rangeland under a big sky",
+    "a weather monitoring station on a desert plot",
+  ],
+  "Astronomy & Sky Knowledge": [
+    "the Milky Way over a dark desert horizon",
+    "a crescent moon and bright planets above mesa silhouettes at dusk",
+    "star trails circling above a lone juniper tree",
+    "a telescope set up on open desert ground at twilight",
+    "constellations above a dimly glowing canyon at night",
+  ],
+  "Indigenous Pedagogy": [
+    "an empty brush ramada shelter over a dirt floor classroom space",
+    "a circle of log benches around a cold fire ring near a garden",
+    "a footpath winding through sage brush toward mesas",
+    "a woven blanket on the ground holding river stones, corn, and a hand drum",
+    "a garden gate standing open onto rows of young plants",
+  ],
+  "Curriculum & Standards": [
+    "printed lesson plans and a pencil on a worn wooden desk",
+    "a stack of three-ring binders beside a potted plant on a classroom shelf",
+    "index cards, sticky notes and a planner spread on a work table",
+    "an open filing box of labeled folders in warm window light",
+    "a chalkboard-side desk with papers, seeds in a dish, and a woven mat",
+  ],
+  "Learning Through Literature": [
+    "a stack of well-used hardcover books on a wooden table",
+    "an open picture book showing desert landscape illustrations",
+    "a reading nook with a woven blanket and a shelf of books",
+    "a single book lying on a porch rail with desert beyond",
+    "library shelves in warm light, spines slightly worn",
+  ],
 };
+
+const LIGHTS = [
+  "soft overcast daylight, neutral color",
+  "clear mid-morning light",
+  "late-afternoon warm light, long shadows",
+  "cool early-morning light, slight haze",
+  "bright midday sun, honest contrast",
+];
+const COMPS = [
+  "eye-level medium shot",
+  "close detail shot, shallow depth of field",
+  "wide establishing shot",
+  "slightly elevated three-quarter view",
+  "low angle from ground level",
+];
+
+// deterministic per-id hash so re-runs produce the same variety
+function hashCode(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
 
 function promptFor(r) {
   const focus = [r.focusArea, r.subject !== "All" ? r.subject : ""].filter(Boolean).join(", ");
+  const scenes = SCENES[r.category] || ["a Southwest desert landscape tied to land-based education"];
+  const h = hashCode(r.id);
+  const scene = scenes[h % scenes.length];
+  const light = LIGHTS[Math.floor(h / 7) % LIGHTS.length];
+  const comp = COMPS[Math.floor(h / 13) % COMPS.length];
   return [
-    `Warm documentary-style editorial photograph for a K-12 education resource library rooted in Indigenous knowledge of the American Southwest.`,
-    `Depict: ${SCENES[r.category] || "desert land-based education"}.`,
-    `This specific resource is about: "${r.title}"${focus ? ` (${focus})` : ""}. Let that guide the scene's details.`,
-    `Golden-hour desert light. Earthy palette: terracotta, sage green, turquoise, ochre, warm cream.`,
-    `Respectful, natural, grounded. STRICTLY NO PEOPLE: no human figures, no faces, no hands, no silhouettes of people. Landscapes, plants, objects, and sky only.`,
-    `No text, no words, no logos, no watermarks, no borders.`,
-    `16:9 landscape composition, shallow depth of field, professional photography.`,
+    `Authentic documentary photograph for a K-12 education resource library rooted in Indigenous knowledge of the American Southwest.`,
+    `Scene: ${scene}. ${comp}, ${light}.`,
+    `This resource is about: "${r.title}"${focus ? ` (${focus})` : ""} — let that quietly inform the details.`,
+    `Looks like a real photo from a working archive: natural color grading, realistic exposure, subtle imperfections, shot on 35mm film. NOT oversaturated, NOT HDR, NOT dreamy or cinematic, no fantasy elements.`,
+    `Earthy palette bias: terracotta, sage, ochre, warm neutrals.`,
+    `STRICTLY NO PEOPLE: no human figures, no faces, no hands, no silhouettes. No text, no words, no logos, no watermarks, no borders.`,
+    `16:9 landscape composition.`,
   ].join(" ");
 }
 

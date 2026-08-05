@@ -254,13 +254,13 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-soil py-16 md:py-20">
+      {/* CTA — light, so it never stacks dark-on-dark with the footer */}
+      <section className="bg-cream border-t border-border py-16 md:py-20">
         <div className="container text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-cream mb-4">
+          <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
             Ready to Explore?
           </h2>
-          <p className="text-cream/60 max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
             Dive into our curated collection of resources and find the materials
             that will enrich your classroom and honor Indigenous knowledge.
           </p>

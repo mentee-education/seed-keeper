@@ -1,7 +1,7 @@
 /*
   DESIGN: "Living Earth" — Regenerative Design
-  Navbar: Custom woodcut logo, warm sand background, DM Serif Display wordmark
-  Sticky with backdrop blur and subtle border
+  Navbar: mentee.ca-matched proportions — tall bar, large logo mark with
+  wordmark + tagline context, pill-style nav links with filled active state.
 */
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
@@ -25,62 +25,56 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isActive = (href: string) =>
+    href === "/"
+      ? location === "/"
+      : location.startsWith(href);
 
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-cream/95 backdrop-blur-lg shadow-sm"
-          : "bg-cream/80 backdrop-blur-md"
-      } border-b border-border/60`}
+          ? "bg-cream/95 shadow-[0_4px_33px_rgba(0,0,0,0.08)]"
+          : "bg-cream/85"
+      } backdrop-blur-xl backdrop-saturate-150 border-b border-border/50`}
     >
-      <div className="container flex items-center justify-between h-16 md:h-[72px]">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 no-underline group">
+      <div className="container flex items-center justify-between py-[14px] md:py-[18px]">
+        {/* Logo + wordmark + tagline */}
+        <Link href="/" className="flex items-center gap-3.5 no-underline group shrink-0">
           <img
             src={LOGO_URL}
             alt="SeedKeeper logo"
-            className="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-11 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <div className="flex flex-col">
-            <span className="font-serif text-xl md:text-[1.4rem] text-soil tracking-tight leading-tight">
+            <span className="font-serif text-[1.35rem] md:text-[1.6rem] text-soil tracking-tight leading-tight">
               SeedKeeper
             </span>
-            <span className="text-[0.6rem] tracking-[0.2em] uppercase text-soil-light/70 hidden sm:block">
+            <span className="text-[0.62rem] md:text-[0.68rem] tracking-[0.18em] uppercase text-soil-light/80 leading-snug">
               Cultivating Seeds of Knowledge
             </span>
           </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const isActive = location === link.href || 
-              (link.href === "/resources" && location.startsWith("/resources"));
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors no-underline rounded-lg ${
-                  isActive
-                    ? "text-terracotta bg-terracotta/8"
-                    : "text-soil-light hover:text-terracotta hover:bg-terracotta/5"
-                }`}
-              >
-                {link.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-indicator"
-                    className="absolute bottom-0 left-3 right-3 h-0.5 bg-terracotta rounded-full"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
+        {/* Desktop Nav — pill links, filled active state */}
+        <nav className="hidden md:flex items-center gap-1.5">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-4 py-1.5 rounded-full text-base transition-all duration-300 no-underline ${
+                isActive(link.href)
+                  ? "bg-terracotta text-white font-semibold shadow-sm"
+                  : "text-soil hover:text-terracotta hover:bg-terracotta/8"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         {/* Mobile Toggle */}
@@ -104,23 +98,18 @@ export default function Navbar() {
             className="md:hidden bg-cream border-b border-border/60 overflow-hidden"
           >
             <div className="px-4 py-2">
-              {navLinks.map((link) => {
-                const isActive = location === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`block py-3.5 text-base font-medium no-underline border-b border-border/30 last:border-0 transition-colors ${
-                      isActive
-                        ? "text-terracotta"
-                        : "text-soil-light"
-                    }`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`block py-3.5 text-base font-medium no-underline border-b border-border/30 last:border-0 transition-colors ${
+                    isActive(link.href) ? "text-terracotta" : "text-soil-light"
+                  }`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </motion.nav>
         )}
