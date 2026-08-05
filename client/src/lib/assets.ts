@@ -3,7 +3,7 @@
 const R2 = "https://pub-d9b63a5f579448e18f36563d7f73323f.r2.dev";
 
 export const IMAGES = {
-  heroMain: `${R2}/hero-main.webp`,
+  heroMain: `${R2}/hero-garden.jpg`,
   heroWater: `${R2}/hero-water.webp`,
   heroEnergy: `${R2}/hero-energy.webp`,
   heroStars: `${R2}/hero-stars.webp`,
