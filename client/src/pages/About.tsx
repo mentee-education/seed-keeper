@@ -23,7 +23,7 @@ export default function About() {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-soil/85 via-soil/65 to-soil/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/75 to-soil/45" />
         </div>
         <div className="relative container py-20 md:py-28">
           <motion.div

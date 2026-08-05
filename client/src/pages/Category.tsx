@@ -66,13 +66,10 @@ export default function Category() {
             >
               <ArrowLeft size={14} /> All Resources
             </Link>
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-2xl">{category.icon}</span>
-              <h1 className="font-serif text-3xl md:text-4xl text-cream">
-                {category.name}
-              </h1>
-            </div>
-            <p className="text-cream/60 max-w-xl">
+            <h1 className="font-serif text-3xl md:text-4xl text-cream mb-2 drop-shadow-md">
+              {category.name}
+            </h1>
+            <p className="text-cream/70 max-w-xl drop-shadow">
               {category.description}
             </p>
           </div>

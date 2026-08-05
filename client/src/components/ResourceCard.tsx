@@ -51,27 +51,19 @@ const borderMap: Record<string, string> = {
   "Learning Through Literature": "border-l-[oklch(0.90_0.06_85)]",
 };
 
-// Category-tinted gradient shown while a resource has no generated thumbnail
-const fallbackArtMap: Record<string, string> = {
-  "Food Systems": "from-[oklch(0.90_0.05_40)] to-[oklch(0.80_0.08_40)]",
-  "Water Systems": "from-[oklch(0.90_0.04_225)] to-[oklch(0.78_0.06_225)]",
-  "Energy Systems": "from-[oklch(0.94_0.05_85)] to-[oklch(0.85_0.09_85)]",
-  "Astronomy & Sky Knowledge": "from-[oklch(0.45_0.05_280)] to-[oklch(0.28_0.05_280)]",
-  "Indigenous Pedagogy": "from-[oklch(0.90_0.04_155)] to-[oklch(0.78_0.06_155)]",
-  "Curriculum & Standards": "from-[oklch(0.92_0.03_40)] to-[oklch(0.83_0.05_40)]",
-  "Learning Through Literature": "from-[oklch(0.94_0.04_85)] to-[oklch(0.86_0.06_85)]",
-};
-
-function categoryIcon(category: string): string {
-  return CATEGORIES.find((c) => c.name === category)?.icon ?? "🌱";
-}
-
 export default function ResourceCard({ resource, compact = false }: ResourceCardProps) {
   const hasLink = resource.url && resource.url !== "#" && resource.url.startsWith("http");
   const stripe = borderMap[resource.category] || "border-l-border";
   const type = typeStyle[resource.resourceType];
-  const [imgOk, setImgOk] = useState(true);
-  const thumb = getThumbUrl(resource.id);
+  // Prefer the per-resource thumbnail; fall back to the category's photo,
+  // and only hide the image block if both fail. No icon placeholders.
+  const categoryImage = CATEGORIES.find((c) => c.name === resource.category)?.image;
+  const [src, setSrc] = useState(getThumbUrl(resource.id));
+  const [hidden, setHidden] = useState(false);
+  const handleImgError = () => {
+    if (categoryImage && src !== categoryImage) setSrc(categoryImage);
+    else setHidden(true);
+  };
 
   if (compact) {
     return (
@@ -81,12 +73,12 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
         {/* Desktop: single row layout */}
         <div className="hidden md:flex items-center gap-3">
           {/* Thumb */}
-          {imgOk && (
+          {!hidden && (
             <img
-              src={thumb}
+              src={src}
               alt=""
               loading="lazy"
-              onError={() => setImgOk(false)}
+              onError={handleImgError}
               className="w-16 h-11 rounded-md object-cover shrink-0"
             />
           )}
@@ -201,20 +193,16 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
     >
       {/* Thumbnail */}
       <div className="relative h-40 overflow-hidden shrink-0">
-        {imgOk ? (
+        {!hidden ? (
           <img
-            src={thumb}
+            src={src}
             alt=""
             loading="lazy"
-            onError={() => setImgOk(false)}
+            onError={handleImgError}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div
-            className={`w-full h-full bg-gradient-to-br ${fallbackArtMap[resource.category] || "from-sand to-secondary"} flex items-center justify-center`}
-          >
-            <span className="text-4xl opacity-50">{categoryIcon(resource.category)}</span>
-          </div>
+          <div className="w-full h-full bg-gradient-to-br from-sand to-secondary" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-soil/60 via-transparent to-transparent" />
         {/* Category badge overlaid */}

@@ -24,16 +24,6 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "Learning Through Literature": <BookOpenText className="w-6 h-6" />,
 };
 
-const categoryColorMap: Record<string, { bg: string; text: string; border: string; iconBg: string }> = {
-  "Food Systems": { bg: "bg-[oklch(0.97_0.02_40)]", text: "text-[oklch(0.40_0.10_40)]", border: "border-[oklch(0.85_0.06_40)]", iconBg: "bg-[oklch(0.55_0.13_40)]" },
-  "Water Systems": { bg: "bg-[oklch(0.96_0.02_225)]", text: "text-[oklch(0.35_0.07_225)]", border: "border-[oklch(0.82_0.05_225)]", iconBg: "bg-[oklch(0.48_0.09_225)]" },
-  "Energy Systems": { bg: "bg-[oklch(0.97_0.02_85)]", text: "text-[oklch(0.45_0.08_85)]", border: "border-[oklch(0.88_0.06_85)]", iconBg: "bg-[oklch(0.78_0.13_85)]" },
-  "Astronomy & Sky Knowledge": { bg: "bg-[oklch(0.95_0.01_55)]", text: "text-[oklch(0.30_0.04_55)]", border: "border-[oklch(0.82_0.02_55)]", iconBg: "bg-[oklch(0.30_0.04_55)]" },
-  "Indigenous Pedagogy": { bg: "bg-[oklch(0.96_0.02_155)]", text: "text-[oklch(0.40_0.05_155)]", border: "border-[oklch(0.82_0.04_155)]", iconBg: "bg-[oklch(0.65_0.06_155)]" },
-  "Curriculum & Standards": { bg: "bg-[oklch(0.97_0.015_40)]", text: "text-[oklch(0.45_0.06_40)]", border: "border-[oklch(0.88_0.04_40)]", iconBg: "bg-[oklch(0.72_0.08_40)]" },
-  "Learning Through Literature": { bg: "bg-[oklch(0.97_0.015_85)]", text: "text-[oklch(0.45_0.06_85)]", border: "border-[oklch(0.90_0.04_85)]", iconBg: "bg-[oklch(0.90_0.06_85)]" },
-};
-
 function slugify(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
@@ -76,7 +66,8 @@ export default function Home() {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-soil/85 via-soil/60 to-soil/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/75 to-soil/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-soil/60 via-transparent to-soil/30" />
         </div>
 
         <div className="relative container py-24 md:py-36 lg:py-44">
@@ -93,7 +84,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream leading-[1.1] mb-6"
+              className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream leading-[1.1] mb-6 drop-shadow-md"
             >
               Cultivating Seeds{" "}
               <span className="text-golden">of Knowledge</span>
@@ -102,7 +93,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-cream/70 text-lg md:text-xl leading-relaxed mb-8 max-w-xl"
+              className="text-cream/85 text-lg md:text-xl leading-relaxed mb-8 max-w-xl drop-shadow"
             >
               A free, searchable library of lesson plans, videos, articles, and curriculum
               guides for K-12 educators — organized around Food, Energy, and Water Systems
@@ -200,7 +191,6 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
             {CATEGORIES.map((cat, i) => {
-              const colors = categoryColorMap[cat.name] || { bg: "bg-muted", text: "text-foreground", border: "border-border", iconBg: "bg-muted" };
               const count = resources.filter(r => r.category === cat.name).length;
               return (
                 <motion.div
@@ -213,21 +203,27 @@ export default function Home() {
                 >
                   <Link
                     href={`/resources/${slugify(cat.name)}`}
-                    className="no-underline block"
+                    className="no-underline block group"
                   >
-                    <div className={`${colors.bg} border ${colors.border} rounded-xl p-5 md:p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 h-full`}>
-                      <div className={`${colors.iconBg} w-11 h-11 rounded-lg flex items-center justify-center text-white mb-4`}>
-                        {categoryIcons[cat.name]}
+                    <div className="relative rounded-xl overflow-hidden h-48 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
+                      <img
+                        src={cat.image}
+                        alt={cat.name}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-soil/95 via-soil/40 to-soil/5" />
+                      <div className="absolute inset-x-0 bottom-0 p-4">
+                        <div className="text-golden mb-2 [&>svg]:w-5 [&>svg]:h-5">
+                          {categoryIcons[cat.name]}
+                        </div>
+                        <h3 className="font-serif text-lg text-cream leading-tight mb-0.5">
+                          {cat.name}
+                        </h3>
+                        <p className="text-cream/60 text-xs font-medium">
+                          {count} resources
+                        </p>
                       </div>
-                      <h3 className={`font-serif text-lg ${colors.text} mb-2`}>
-                        {cat.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2">
-                        {cat.description}
-                      </p>
-                      <span className="text-xs font-medium text-muted-foreground">
-                        {count} resources
-                      </span>
                     </div>
                   </Link>
                 </motion.div>
