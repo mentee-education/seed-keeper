@@ -121,7 +121,7 @@ export default function Videos() {
 
       {/* Filters — single-row tab bar on desktop, dropdown on mobile */}
       <div className="sticky top-[72px] md:top-[92px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container flex items-center gap-3 py-3 md:py-0">
+        <div className="container flex items-center gap-3 py-3">
           {/* Mobile: compact dropdown so filters don't eat the screen */}
           <div className="relative flex-1 min-w-0 md:hidden">
             <select
@@ -141,8 +141,8 @@ export default function Videos() {
             <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           </div>
 
-          {/* Desktop: underline tab bar, one row, scrolls if tight */}
-          <nav className="hidden md:flex items-center flex-1 min-w-0 overflow-x-auto scrollbar-hide" aria-label="Filter videos by topic">
+          {/* Desktop: centered pill group that wraps — never clips at any width */}
+          <nav className="hidden md:flex flex-wrap items-center justify-center gap-2 flex-1 min-w-0" aria-label="Filter videos by topic">
             {["All", ...categories].map((c) => {
               const n = c === "All" ? allVideos.length : allVideos.filter((v) => v.category === c).length;
               const active = category === c;
@@ -150,23 +150,22 @@ export default function Videos() {
                 <button
                   key={c}
                   onClick={() => setCategory(active && c !== "All" ? "All" : c)}
-                  className={`relative whitespace-nowrap px-2.5 lg:px-3 py-4 text-[0.82rem] font-medium transition-colors ${
-                    active ? "text-terracotta" : "text-muted-foreground hover:text-foreground"
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs lg:text-sm font-medium transition-all ${
+                    active
+                      ? "bg-terracotta text-white shadow-sm"
+                      : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-terracotta/30 hover:bg-terracotta/5"
                   }`}
                 >
                   {c === "All" ? "All Topics" : c}
-                  <span className={`ml-1 text-xs tabular-nums ${active ? "text-terracotta/70" : "text-muted-foreground/60"}`}>
+                  <span className={`text-[0.65rem] lg:text-xs tabular-nums ${active ? "text-white/70" : "text-muted-foreground/50"}`}>
                     {n}
                   </span>
-                  {active && (
-                    <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-terracotta rounded-full" />
-                  )}
                 </button>
               );
             })}
           </nav>
 
-          {/* Grade select — right-aligned, vertically centered */}
+          {/* Grade select — inline with the pills */}
           <div className="relative shrink-0">
             <select
               value={grade}
