@@ -1,6 +1,8 @@
 // "Living Earth" Design System — Regenerative Design
 // All resources for the SeedKeeper resource library, across 7 categories
-import { IMAGES } from "@/lib/assets";
+// Each category has THREE distinct images (home card / resources tile /
+// category-page banner) — no image is ever reused across slots.
+import { IMAGES, R2_BASE } from "@/lib/assets";
 
 export interface Resource {
   id: string;
@@ -37,55 +39,69 @@ export type ResourceType =
   | "Educator Resource"
   | "Website/Database";
 
-export const CATEGORIES: { name: Category; icon: string; color: string; description: string; image: string }[] = [
+export const CATEGORIES: { name: Category; icon: string; color: string; description: string; image: string; tile: string; banner: string }[] = [
   {
     name: "Food Systems",
     icon: "🌽",
     color: "bg-terracotta",
     description: "Traditional agriculture, food sovereignty, Indigenous foods knowledge, and garden-based learning.",
-    image: IMAGES.indigenousGarden
+    image: IMAGES.catFood,
+    tile: `${R2_BASE}/cattile-food.jpg`,
+    banner: `${R2_BASE}/catbanner-food.jpg`
   },
   {
     name: "Water Systems",
     icon: "💧",
     color: "bg-turquoise",
     description: "Water rights, water quality science, traditional water knowledge, and environmental justice.",
-    image: IMAGES.heroWater
+    image: IMAGES.heroWater,
+    tile: `${R2_BASE}/cattile-water.jpg`,
+    banner: `${R2_BASE}/catbanner-water.jpg`
   },
   {
     name: "Energy Systems",
     icon: "☀️",
     color: "bg-golden",
     description: "Agrivoltaics, renewable energy technologies, and energy sovereignty.",
-    image: IMAGES.heroEnergy
+    image: IMAGES.heroEnergy,
+    tile: `${R2_BASE}/cattile-energy.jpg`,
+    banner: `${R2_BASE}/catbanner-energy.jpg`
   },
   {
     name: "Astronomy & Sky Knowledge",
     icon: "⭐",
     color: "bg-soil",
     description: "Indigenous star knowledge, seasonal calendars, and night sky science.",
-    image: IMAGES.heroStars
+    image: IMAGES.heroStars,
+    tile: `${R2_BASE}/cattile-astronomy.jpg`,
+    banner: `${R2_BASE}/catbanner-astronomy.jpg`
   },
   {
     name: "Indigenous Pedagogy",
     icon: "📚",
     color: "bg-sage",
     description: "Decolonizing curriculum, land-based learning, and culturally responsive teaching.",
-    image: IMAGES.catPedagogy
+    image: IMAGES.catPedagogy,
+    tile: `${R2_BASE}/cattile-pedagogy.jpg`,
+    banner: `${R2_BASE}/catbanner-pedagogy.jpg`
   },
   {
     name: "Curriculum & Standards",
     icon: "📋",
     color: "bg-terracotta-light",
     description: "Diné culture and language standards, Arizona state standards, and lesson plan templates.",
-    image: IMAGES.catCurriculum
+    image: IMAGES.catCurriculum,
+    tile: `${R2_BASE}/cattile-curriculum.jpg`,
+    banner: `${R2_BASE}/catbanner-curriculum.jpg`
   },
   {
     name: "Learning Through Literature",
     icon: "📖",
     color: "bg-golden-light",
     description: "Annotated book lists, stories, oral traditions, and academic reading.",
-    image: IMAGES.catLiterature
+    image: IMAGES.catLiterature,
+    tile: `${R2_BASE}/cattile-literature.jpg`,
+    banner: `${R2_BASE}/catbanner-literature.jpg`
   },
 ];
 

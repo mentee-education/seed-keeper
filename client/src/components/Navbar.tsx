@@ -14,6 +14,7 @@ const LOGO_URL = IMAGES.logo;
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/resources", label: "Resources" },
+  { href: "/videos", label: "Videos" },
   { href: "/about", label: "About" },
 ];
 

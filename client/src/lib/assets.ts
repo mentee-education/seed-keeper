@@ -1,6 +1,8 @@
 // All site imagery is hosted on Cloudflare R2 (bucket: seedkeeper).
 // Never commit images to the repo or hotlink third-party/temporary hosts.
+// RULE: every image appears in exactly ONE slot on the site — never reuse.
 const R2 = "https://pub-d9b63a5f579448e18f36563d7f73323f.r2.dev";
+export const R2_BASE = R2;
 
 export const IMAGES = {
   heroMain: `${R2}/hero-garden.jpg`,
@@ -8,12 +10,14 @@ export const IMAGES = {
   heroEnergy: `${R2}/hero-energy.webp`,
   heroStars: `${R2}/hero-stars.webp`,
   indigenousGarden: `${R2}/indigenous-garden.webp`,
-  logo: `${R2}/logo.webp`,
-  logoDark: `${R2}/logo-dark.webp`,
+  logo: `${R2}/logo-mark.png`,
+  logoDark: `${R2}/logo-mark-dark.png`,
   catFood: `${R2}/cat-food.jpg`,
   catPedagogy: `${R2}/cat-pedagogy.jpg`,
   catCurriculum: `${R2}/cat-curriculum.jpg`,
   catLiterature: `${R2}/cat-literature.jpg`,
+  aboutHero: `${R2}/about-hero.jpg`,
+  resourcesHeader: `${R2}/resources-header.jpg`,
 } as const;
 
 // Per-resource thumbnails live at thumbs/<resource id>.jpg on the same bucket

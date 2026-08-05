@@ -66,8 +66,9 @@ export default function Home() {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/75 to-soil/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-soil/60 via-transparent to-soil/30" />
+          {/* Heavy scrim behind the copy (left), image left bright on the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/65 to-transparent" />
+          <div className="grain" />
         </div>
 
         <div className="relative container py-24 md:py-36 lg:py-44">
@@ -189,7 +190,8 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+          {/* 7 cards: 4 on the first row, 3 on the second — never an orphan */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-5">
             {CATEGORIES.map((cat, i) => {
               const count = resources.filter(r => r.category === cat.name).length;
               return (
@@ -200,6 +202,7 @@ export default function Home() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
+                  className={`${i === 6 ? "sm:col-span-2 lg:col-span-4" : i < 4 ? "lg:col-span-3" : "lg:col-span-4"}`}
                 >
                   <Link
                     href={`/resources/${slugify(cat.name)}`}
@@ -324,7 +327,7 @@ export default function Home() {
               {
                 icon: <Library className="w-6 h-6" />,
                 title: "What Is This?",
-                description: `A curated collection of ${resources.length}+ educational resources from trusted organizations — lesson plans, videos, articles, curriculum guides, and more — all vetted and ready for classroom use.`,
+                description: `A curated collection of ${resources.length} educational resources from trusted organizations — lesson plans, videos, articles, curriculum guides, and more — all vetted and ready for classroom use.`,
                 accent: "bg-terracotta",
               },
               {
@@ -390,7 +393,7 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-6">
                 <div>
-                  <p className="font-serif text-3xl text-terracotta">{resources.length}+</p>
+                  <p className="font-serif text-3xl text-terracotta">{resources.length}</p>
                   <p className="text-xs text-muted-foreground font-medium">Curated Resources</p>
                 </div>
                 <div className="w-px h-10 bg-border" />

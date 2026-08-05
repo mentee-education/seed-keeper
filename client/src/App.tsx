@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import About from "./pages/About";
 import Category from "./pages/Category";
+import Videos from "./pages/Videos";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/resources"} component={Resources} />
       <Route path={"/resources/:category"} component={Category} />
+      <Route path={"/videos"} component={Videos} />
       <Route path={"/about"} component={About} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

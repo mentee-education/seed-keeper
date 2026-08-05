@@ -10,7 +10,8 @@ const LOGO_DARK_URL = IMAGES.logoDark;
 
 export default function Footer() {
   return (
-    <footer className="bg-soil text-cream/90">
+    <footer className="relative bg-soil text-cream/90">
+      <div className="grain" />
       {/* Top wave divider */}
       <div className="w-full overflow-hidden leading-none">
         <svg viewBox="0 0 1200 60" preserveAspectRatio="none" className="w-full h-8 md:h-12">
@@ -35,12 +36,12 @@ export default function Footer() {
                 <span className="font-serif text-xl text-cream tracking-tight block">
                   SeedKeeper
                 </span>
-                <span className="text-[0.6rem] tracking-[0.2em] uppercase text-cream/50">
+                <span className="text-[0.6rem] tracking-[0.2em] uppercase text-cream/65">
                   Cultivating Seeds of Knowledge
                 </span>
               </div>
             </div>
-            <p className="text-sm text-cream/60 leading-relaxed max-w-sm mt-4">
+            <p className="text-sm text-cream/80 leading-relaxed max-w-sm mt-4">
               A curated resource library bridging Indigenous knowledge systems
               with K-12 education. Developed in partnership with the Indigenous
               Resilience Center at the University of Arizona.
@@ -52,17 +53,22 @@ export default function Footer() {
             <h4 className="font-serif text-base text-golden mb-4">Navigate</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/" className="text-sm text-cream/60 hover:text-golden transition-colors no-underline">
+                <Link href="/" className="text-sm text-cream/80 hover:text-golden transition-colors no-underline">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="text-sm text-cream/60 hover:text-golden transition-colors no-underline">
+                <Link href="/resources" className="text-sm text-cream/80 hover:text-golden transition-colors no-underline">
                   Resource Library
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm text-cream/60 hover:text-golden transition-colors no-underline">
+                <Link href="/videos" className="text-sm text-cream/80 hover:text-golden transition-colors no-underline">
+                  Video Library
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-sm text-cream/80 hover:text-golden transition-colors no-underline">
                   About
                 </Link>
               </li>
@@ -75,10 +81,10 @@ export default function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://irec.arizona.edu/"
+                  href="https://resilience.arizona.edu/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-cream/60 hover:text-golden transition-colors no-underline"
+                  className="text-sm text-cream/80 hover:text-golden transition-colors no-underline"
                 >
                   Indigenous Resilience Center
                 </a>
@@ -88,7 +94,7 @@ export default function Footer() {
                   href="https://www.arizona.edu/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-cream/60 hover:text-golden transition-colors no-underline"
+                  className="text-sm text-cream/80 hover:text-golden transition-colors no-underline"
                 >
                   University of Arizona
                 </a>
@@ -99,12 +105,27 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-cream/40">
+          <p className="text-xs text-cream/60">
             &copy; {new Date().getFullYear()} SeedKeeper. Built with respect for the land and its peoples.
           </p>
-          <p className="text-xs text-cream/30">
+          <p className="text-xs text-cream/50">
             seedkeeper.org
           </p>
+        </div>
+      </div>
+
+      {/* Developed by Mentee */}
+      <div className="relative border-t border-cream/15 bg-[oklch(0.24_0.035_55)]">
+        <div className="container py-4 flex items-center justify-center">
+          <a
+            href="https://mentee.ca"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 opacity-80 hover:opacity-100 transition-opacity no-underline"
+          >
+            <span className="text-xs uppercase tracking-widest text-cream/70">Developed by</span>
+            <img src="/mentee-logo.svg" alt="Mentee" className="h-6" />
+          </a>
         </div>
       </div>
     </footer>

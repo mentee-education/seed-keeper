@@ -214,8 +214,9 @@ export default function Resources() {
       {/* Header — photographic band */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={IMAGES.heroMain} alt="" className="w-full h-full object-cover" style={{ objectPosition: "center 40%" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-soil/90 via-soil/70 to-soil/40" />
+          <img src={IMAGES.resourcesHeader} alt="" className="w-full h-full object-cover" style={{ objectPosition: "center 40%" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/65 to-transparent" />
+          <div className="grain" />
         </div>
         <div className="relative container py-10 md:py-14">
           <p className="text-golden text-sm font-semibold uppercase tracking-[0.15em] mb-2">
@@ -257,7 +258,7 @@ export default function Resources() {
                 } ${(categoryCounts[cat.name] || 0) === 0 ? "opacity-40 pointer-events-none" : ""}`}
               >
                 <img
-                  src={cat.image}
+                  src={cat.tile}
                   alt={cat.name}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

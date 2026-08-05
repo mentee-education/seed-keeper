@@ -19,11 +19,12 @@ export default function About() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={IMAGES.heroEnergy}
+            src={IMAGES.aboutHero}
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/75 to-soil/45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/95 via-soil/65 to-transparent" />
+          <div className="grain" />
         </div>
         <div className="relative container py-20 md:py-28">
           <motion.div
@@ -168,7 +169,7 @@ export default function About() {
                 across tribal communities.
               </p>
               <a
-                href="https://irec.arizona.edu/"
+                href="https://resilience.arizona.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-terracotta hover:text-terracotta/80 transition-colors no-underline"

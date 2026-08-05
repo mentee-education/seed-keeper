@@ -53,11 +53,12 @@ export default function Category() {
       {/* Hero */}
       <section className="relative overflow-hidden h-64 md:h-80">
         <img
-          src={category.image}
+          src={category.banner}
           alt={category.name}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-soil/90 via-soil/50 to-soil/20" />
+        <div className="grain" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-8 md:pb-10">
             <Link
