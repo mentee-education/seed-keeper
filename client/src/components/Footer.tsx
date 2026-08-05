@@ -17,7 +17,7 @@ export default function Footer() {
               <img
                 src={IMAGES.logo}
                 alt="SeedKeeper logo"
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain rounded-full ring-1 ring-border/60"
               />
               <div>
                 <span className="font-serif text-xl text-soil tracking-tight block">

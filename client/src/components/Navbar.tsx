@@ -48,7 +48,7 @@ export default function Navbar() {
           <img
             src={LOGO_URL}
             alt="SeedKeeper logo"
-            className="h-11 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-11 md:h-14 w-auto object-contain rounded-full ring-1 ring-border/60 transition-transform duration-300 group-hover:scale-105"
           />
           <div className="flex flex-col">
             <span className="font-serif text-[1.35rem] md:text-[1.6rem] text-soil tracking-tight leading-tight">

@@ -55,10 +55,14 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
   const hasLink = resource.url && resource.url !== "#" && resource.url.startsWith("http");
   const stripe = borderMap[resource.category] || "border-l-border";
   const type = typeStyle[resource.resourceType];
-  // Prefer the per-resource thumbnail; fall back to the category's photo,
-  // and only hide the image block if both fail. No icon placeholders.
+  // YouTube videos use their real YouTube thumbnail; everything else uses the
+  // per-resource photo, falling back to the category's photo. No icon placeholders.
   const categoryImage = CATEGORIES.find((c) => c.name === resource.category)?.image;
-  const [src, setSrc] = useState(getThumbUrl(resource.id));
+  const [src, setSrc] = useState(
+    resource.youtubeId
+      ? `https://i.ytimg.com/vi/${resource.youtubeId}/hqdefault.jpg`
+      : getThumbUrl(resource.id)
+  );
   const [hidden, setHidden] = useState(false);
   const handleImgError = () => {
     if (categoryImage && src !== categoryImage) setSrc(categoryImage);
