@@ -39,7 +39,10 @@ const fuse = new Fuse(resources, {
 type SortOption = "title-asc" | "title-desc" | "category" | "grade" | "relevance";
 
 export default function Resources() {
-  const [searchQuery, setSearchQuery] = useState("");
+  // Accept a search handoff from the home-page hero (/resources?q=…)
+  const [searchQuery, setSearchQuery] = useState(
+    () => new URLSearchParams(window.location.search).get("q") ?? ""
+  );
   const [selectedCategory, setSelectedCategory] = useState<Category | "All">("All");
   const [selectedGrade, setSelectedGrade] = useState("All");
   const [selectedSubject, setSelectedSubject] = useState("All");

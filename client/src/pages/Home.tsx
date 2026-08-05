@@ -4,12 +4,15 @@
   Typography: DM Serif Display headings, DM Sans body
   Colors: Earth strata — terracotta, sage, turquoise, golden, soil
 */
-import { Link } from "wouter";
-import { ArrowRight, BookOpen, Droplets, Sun, Star, Leaf, FileText, BookOpenText, Users, Compass, SlidersHorizontal, ExternalLink, FileVideo, BookMarked, GraduationCap, Globe, ClipboardList, Library } from "lucide-react";
+import { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { ArrowRight, Search, BookOpen, Droplets, Sun, Star, Leaf, FileText, BookOpenText, Users, SlidersHorizontal, FileVideo, BookMarked, GraduationCap, Globe, ClipboardList, Library } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { resources, CATEGORIES, type ResourceType } from "@/data/resources";
+import ResourceCard from "@/components/ResourceCard";
+import { resources, CATEGORIES, getFeaturedResources, type ResourceType } from "@/data/resources";
+import { IMAGES } from "@/lib/assets";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   "Food Systems": <Leaf className="w-6 h-6" />,
@@ -45,6 +48,21 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const [, navigate] = useLocation();
+  const [heroQuery, setHeroQuery] = useState("");
+  const featured = getFeaturedResources();
+
+  const lessonCount = resources.filter(
+    (r) => r.resourceType === "Lesson Plan" || r.resourceType === "Curriculum Guide"
+  ).length;
+  const videoCount = resources.filter((r) => r.resourceType === "Video").length;
+
+  const submitHeroSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = heroQuery.trim();
+    navigate(q ? `/resources?q=${encodeURIComponent(q)}` : "/resources");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
@@ -54,7 +72,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/hero-main-9SyDjU9RaqT4pZCmuWqXZW.webp"
+            src={IMAGES.heroMain}
             alt=""
             className="w-full h-full object-cover"
           />
@@ -94,20 +112,57 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
             >
-              <Link
-                href="/resources"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-terracotta text-white rounded-lg font-medium text-sm hover:bg-terracotta/90 transition-colors no-underline"
-              >
-                Explore Resources <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-cream/10 text-cream border border-cream/20 rounded-lg font-medium text-sm hover:bg-cream/20 transition-colors no-underline"
-              >
-                About the Workshop
-              </Link>
+              {/* Live search — lands on the library pre-filtered */}
+              <form onSubmit={submitHeroSearch} className="relative max-w-lg mb-5">
+                <Search
+                  size={16}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <input
+                  type="text"
+                  value={heroQuery}
+                  onChange={(e) => setHeroQuery(e.target.value)}
+                  placeholder="Search lessons, topics, organizations…"
+                  aria-label="Search the resource library"
+                  className="w-full pl-11 pr-32 py-3.5 rounded-xl bg-cream text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-golden/70 shadow-xl"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-2 bg-terracotta text-white rounded-lg text-sm font-medium hover:bg-terracotta/90 transition-colors"
+                >
+                  Search
+                </button>
+              </form>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
+                <Link
+                  href="/resources"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-golden hover:text-golden-light transition-colors no-underline"
+                >
+                  Browse all resources <ArrowRight size={14} />
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-sm text-cream/60 hover:text-cream transition-colors no-underline"
+                >
+                  About the workshop
+                </Link>
+              </div>
+              {/* Library at a glance */}
+              <div className="flex gap-8">
+                {[
+                  { n: resources.length, label: "Curated Resources" },
+                  { n: lessonCount, label: "Lessons & Guides" },
+                  { n: videoCount, label: "Videos" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <p className="font-serif text-2xl text-cream leading-none">{s.n}</p>
+                    <p className="text-[0.65rem] font-semibold text-cream/50 uppercase tracking-wide mt-1">
+                      {s.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -209,6 +264,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== START HERE — EDUCATOR PICKS ===== */}
+      <section className="py-16 md:py-20">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <div className="flex items-center gap-2.5 shrink-0">
+              <div className="w-1 h-6 bg-golden rounded-full" />
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground">Start Here</h2>
+            </div>
+            <div className="flex-1 h-px bg-border" />
+            <p className="text-sm text-muted-foreground hidden md:block shrink-0">
+              One strong entry point for each knowledge domain
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {featured.map((resource, i) => (
+              <motion.div
+                key={resource.id}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <ResourceCard resource={resource} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== FOR EDUCATORS EXPLAINER ===== */}
       <section className="py-16 md:py-24 bg-cream">
         <div className="container">
@@ -281,7 +373,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="relative h-64 lg:h-auto">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/indigenous-garden-ckcQVhmhicunuwk7tcy3aE.webp"
+              src={IMAGES.indigenousGarden}
               alt="A thriving Three Sisters garden with corn, beans, and squash among red sandstone mesas at golden hour"
               className="w-full h-full object-cover"
             />
@@ -318,91 +410,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ===== HOW IT WORKS ===== */}
-      <section className="py-16 md:py-24 bg-cream">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12 md:mb-16"
-          >
-            <p className="text-turquoise text-sm font-semibold uppercase tracking-[0.15em] mb-3">
-              For Educators
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
-              How to Use This Library
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Whether you're building a lesson plan or deepening your own understanding,
-              here's how to get the most from these resources.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 max-w-5xl mx-auto">
-            {[
-              {
-                step: "01",
-                title: "Choose a Knowledge Domain",
-                desc: "Start with one of seven domains like Food Systems or Water Systems. Each contains curated resources from organizations like the National Science Teaching Association, Smithsonian, and tribal education programs.",
-                icon: <Compass className="w-7 h-7" />,
-              },
-              {
-                step: "02",
-                title: "Filter for Your Classroom",
-                desc: "Use filters to narrow by grade level (Pre-K through 12), subject area (Science, Social Studies, ELA, Math, Art, Garden/TEK), and resource type (lesson plans, videos, articles, books, and more).",
-                icon: <SlidersHorizontal className="w-7 h-7" />,
-              },
-              {
-                step: "03",
-                title: "Access & Teach",
-                desc: "Each resource links directly to its source — open it, bookmark it, or integrate it into your existing lesson plans. No account needed, no paywall, no barriers.",
-                icon: <ExternalLink className="w-7 h-7" />,
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.step}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="text-center"
-              >
-                <div className="w-14 h-14 rounded-full bg-turquoise/10 text-turquoise flex items-center justify-center mx-auto mb-4">
-                  {item.icon}
-                </div>
-                <p className="text-terracotta text-xs font-bold uppercase tracking-[0.2em] mb-2">
-                  Step {item.step}
-                </p>
-                <h3 className="font-serif text-xl text-foreground mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-center mt-12"
-          >
-            <Link
-              href="/resources"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-terracotta text-white rounded-lg font-medium text-sm hover:bg-terracotta/90 transition-colors no-underline"
-            >
-              Start Browsing <ArrowRight size={16} />
-            </Link>
-          </motion.div>
         </div>
       </section>
 

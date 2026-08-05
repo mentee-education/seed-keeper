@@ -1,6 +1,6 @@
 // "Living Earth" Design System — Regenerative Design
-// All resources for the SeedKeeper resource library
-// Total: 188 resources across 7 categories
+// All resources for the SeedKeeper resource library, across 7 categories
+import { IMAGES } from "@/lib/assets";
 
 export interface Resource {
   id: string;
@@ -43,49 +43,49 @@ export const CATEGORIES: { name: Category; icon: string; color: string; descript
     icon: "🌽",
     color: "bg-terracotta",
     description: "Traditional agriculture, food sovereignty, Indigenous foods knowledge, and garden-based learning.",
-    image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&q=80"
+    image: IMAGES.indigenousGarden
   },
   {
     name: "Water Systems",
     icon: "💧",
     color: "bg-turquoise",
     description: "Water rights, water quality science, traditional water knowledge, and environmental justice.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/hero-water-nvJduMwU8jxM5YP84EvS8i.webp"
+    image: IMAGES.heroWater
   },
   {
     name: "Energy Systems",
     icon: "☀️",
     color: "bg-golden",
     description: "Agrivoltaics, renewable energy technologies, and energy sovereignty.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/hero-energy-F3pBqRUXvXymnCKGU2aF3K.webp"
+    image: IMAGES.heroEnergy
   },
   {
     name: "Astronomy & Sky Knowledge",
     icon: "⭐",
     color: "bg-soil",
     description: "Indigenous star knowledge, seasonal calendars, and night sky science.",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/hero-stars-FTYnuN5ZezLU3cSRZv4WS4.webp"
+    image: IMAGES.heroStars
   },
   {
     name: "Indigenous Pedagogy",
     icon: "📚",
     color: "bg-sage",
     description: "Decolonizing curriculum, land-based learning, and culturally responsive teaching.",
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80"
+    image: IMAGES.catPedagogy
   },
   {
     name: "Curriculum & Standards",
     icon: "📋",
     color: "bg-terracotta-light",
     description: "Diné culture and language standards, Arizona state standards, and lesson plan templates.",
-    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80"
+    image: IMAGES.catCurriculum
   },
   {
     name: "Learning Through Literature",
     icon: "📖",
     color: "bg-golden-light",
     description: "Annotated book lists, stories, oral traditions, and academic reading.",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80"
+    image: IMAGES.catLiterature
   },
 ];
 
@@ -2098,6 +2098,23 @@ export function getCategoryColor(category: Category): string {
     case "Learning Through Literature": return "bg-[oklch(0.90_0.06_85)] text-[oklch(0.25_0.03_55)]";
     default: return "bg-muted text-muted-foreground";
   }
+}
+
+// Hand-picked "Start Here" resources shown on the home page — one strong,
+// broadly useful entry point per knowledge domain.
+export const FEATURED_IDS = [
+  "fs-15",           // Indigenous Foods Teaching Toolbox — Natural History Museum of Utah
+  "ws-3",            // Earth's Freshwater teaching guide — National Geographic
+  "es-13",           // Intro to Renewable Energy — Leech Lake Tribal College
+  "ask-collection",  // Native Skywatchers Resource Collection
+  "cs-10",           // Framework for Essential Understandings — Smithsonian NMAI
+  "ip-18",           // Land-Based Education: Personal Reflection — NCCIE
+];
+
+export function getFeaturedResources(): Resource[] {
+  return FEATURED_IDS
+    .map((id) => resources.find((r) => r.id === id))
+    .filter((r): r is Resource => Boolean(r));
 }
 
 export function getResourceTypeIcon(type: ResourceType): string {

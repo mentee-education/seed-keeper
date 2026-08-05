@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { IMAGES } from "@/lib/assets";
 
 export default function About() {
   return (
@@ -18,7 +19,7 @@ export default function About() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/hero-energy-F3pBqRUXvXymnCKGU2aF3K.webp"
+            src={IMAGES.heroEnergy}
             alt=""
             className="w-full h-full object-cover"
           />

@@ -4,8 +4,9 @@
   Updated branding: Indigenous Resilience Center at University of Arizona
 */
 import { Link } from "wouter";
+import { IMAGES } from "@/lib/assets";
 
-const LOGO_DARK_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/seedkeeper-logo-dark-oAGxFJDuNNQ2fVZMzAXMHZ.webp";
+const LOGO_DARK_URL = IMAGES.logoDark;
 
 export default function Footer() {
   return (

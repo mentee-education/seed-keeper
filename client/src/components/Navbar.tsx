@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IMAGES } from "@/lib/assets";
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/GJEDwPAUKshiXegbpvTbbn/seedkeeper-logo-ihT4cqWYud2eVBvnnmFAK4.webp";
+const LOGO_URL = IMAGES.logo;
 
 const navLinks = [
   { href: "/", label: "Home" },

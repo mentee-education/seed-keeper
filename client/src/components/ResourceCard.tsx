@@ -3,13 +3,39 @@
   ResourceCard: Two modes — full card (grid) and compact row (list)
   Compact mode: single-row on desktop, tight two-line on mobile
 */
-import { type Resource, getCategoryColor, getResourceTypeIcon } from "@/data/resources";
-import { ExternalLink, Calendar } from "lucide-react";
+import { type Resource, type ResourceType, getCategoryColor } from "@/data/resources";
+import {
+  ExternalLink,
+  Calendar,
+  ClipboardList,
+  FileText,
+  BookMarked,
+  Play,
+  BookOpen,
+  ScrollText,
+  GraduationCap,
+  Users,
+  Globe,
+} from "lucide-react";
 
 interface ResourceCardProps {
   resource: Resource;
   compact?: boolean;
 }
+
+// Type badges: earth-palette tints keyed to what the resource *is* —
+// growth greens for teachables, water blues for media, soil tones for reference
+const typeStyle: Record<ResourceType, { icon: React.ReactNode; badge: string }> = {
+  "Lesson Plan": { icon: <ClipboardList size={11} />, badge: "bg-[oklch(0.93_0.035_155)] text-[oklch(0.35_0.07_155)] border border-[oklch(0.80_0.05_155)]/50" },
+  "Curriculum Guide": { icon: <BookOpen size={11} />, badge: "bg-[oklch(0.95_0.03_40)] text-[oklch(0.42_0.11_40)] border border-[oklch(0.82_0.07_40)]/50" },
+  "Academic Article": { icon: <FileText size={11} />, badge: "bg-[oklch(0.94_0.01_55)] text-[oklch(0.35_0.04_55)] border border-[oklch(0.82_0.02_55)]/60" },
+  "Book/Literature": { icon: <BookMarked size={11} />, badge: "bg-[oklch(0.95_0.045_85)] text-[oklch(0.45_0.09_85)] border border-[oklch(0.85_0.07_85)]/60" },
+  "Video": { icon: <Play size={11} />, badge: "bg-[oklch(0.94_0.03_225)] text-[oklch(0.38_0.08_225)] border border-[oklch(0.80_0.05_225)]/50" },
+  "Standards Document": { icon: <ScrollText size={11} />, badge: "bg-[oklch(0.94_0.01_55)] text-[oklch(0.35_0.04_55)] border border-[oklch(0.82_0.02_55)]/60" },
+  "Student Resource": { icon: <GraduationCap size={11} />, badge: "bg-[oklch(0.95_0.045_85)] text-[oklch(0.45_0.09_85)] border border-[oklch(0.85_0.07_85)]/60" },
+  "Educator Resource": { icon: <Users size={11} />, badge: "bg-[oklch(0.93_0.035_155)] text-[oklch(0.35_0.07_155)] border border-[oklch(0.80_0.05_155)]/50" },
+  "Website/Database": { icon: <Globe size={11} />, badge: "bg-[oklch(0.94_0.03_225)] text-[oklch(0.38_0.08_225)] border border-[oklch(0.80_0.05_225)]/50" },
+};
 
 const borderMap: Record<string, string> = {
   "Food Systems": "border-l-[oklch(0.55_0.13_40)]",
@@ -24,6 +50,7 @@ const borderMap: Record<string, string> = {
 export default function ResourceCard({ resource, compact = false }: ResourceCardProps) {
   const hasLink = resource.url && resource.url !== "#" && resource.url.startsWith("http");
   const stripe = borderMap[resource.category] || "border-l-border";
+  const type = typeStyle[resource.resourceType];
 
   if (compact) {
     return (
@@ -63,9 +90,13 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
             )}
           </div>
 
-          {/* Type icon */}
-          <span className="text-xs text-muted-foreground shrink-0" title={resource.resourceType}>
-            {getResourceTypeIcon(resource.resourceType)}
+          {/* Type badge */}
+          <span
+            className={`inline-flex items-center gap-1 text-[0.6rem] font-semibold px-2 py-0.5 rounded-full shrink-0 ${type.badge}`}
+            title={resource.resourceType}
+          >
+            {type.icon}
+            <span className="hidden xl:inline">{resource.resourceType}</span>
           </span>
 
           {/* Link */}
@@ -92,8 +123,11 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
             <span className={`text-[0.55rem] font-semibold uppercase tracking-wider px-1.5 py-px rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
               {resource.category}
             </span>
-            <span className="text-[0.65rem] text-muted-foreground shrink-0">
-              {getResourceTypeIcon(resource.resourceType)}
+            <span
+              className={`inline-flex items-center gap-1 text-[0.55rem] font-semibold px-1.5 py-px rounded-full shrink-0 ${type.badge}`}
+              title={resource.resourceType}
+            >
+              {type.icon}
             </span>
           </div>
           <h3 className="font-serif text-sm text-foreground leading-tight mb-1 group-hover:text-terracotta transition-colors">
@@ -138,8 +172,10 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
         <span className={`text-[0.65rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${getCategoryColor(resource.category)}`}>
           {resource.category}
         </span>
-        <span className="text-xs text-muted-foreground flex items-center gap-1 shrink-0">
-          <span>{getResourceTypeIcon(resource.resourceType)}</span>
+        <span
+          className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold px-2 py-0.5 rounded-full shrink-0 ${type.badge}`}
+        >
+          {type.icon}
           <span className="hidden sm:inline">{resource.resourceType}</span>
         </span>
       </div>
