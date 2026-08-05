@@ -130,7 +130,7 @@ export const resources: Resource[
 {
     id: "fs-2",
     title: "Awakening the Seeds in Native Youth: Native Farm to School Evaluation Report",
-    url: "https://www.firstnations.org/publications/awakening-the-seeds-in-native-youth-native-farm-to-school-evaluation-report/",
+    url: "https://www.firstnations.org/resources/awakening-the-seeds/",
     organization: "First Nations Development Institute",
     summary: "This evaluation report outlines the community partners’ objectives, timelines, outcomes, and impacts across six food sovereignty focus areas, including language, traditional foodways, community, traditional foods, land stewardship, and traditional knowledge.",
     category: "Food Systems",
@@ -186,7 +186,7 @@ export const resources: Resource[
 {
     id: "fs-6",
     title: "Indigenizing Food Access for Our Communities: Native Food Distribution Grant Evaluation Report",
-    url: "https://www.firstnations.org/publications/indigenizing-food-access-for-our-communities-native-food-distribution-grant-evaluation-report/",
+    url: "https://www.firstnations.org/resources/indigenizing-food-access-for-our-communities-native-food-distribution-grant-evaluation-report/",
     organization: "First Nations Development Institute",
     summary: "This report summarizes key findings from an evaluation of a grant opportunity that supported Native-led entities in strengthening food security. It highlights successes, challenges, and overall experiences of community partners.",
     category: "Food Systems",
@@ -214,7 +214,7 @@ export const resources: Resource[
 {
     id: "fs-9",
     title: "Indigenous Food Sovereignty Sources Guide",
-    url: "https://www.firstnations.org/publications/indigenous-food-sovereignty-sources-guide/",
+    url: "https://www.firstnations.org/resources/indigenous-food-sovereignty-sources-guide/",
     organization: "First Nations Development Institute",
     summary: "A compilation of resources on Indigenous Food Sovereignty, intended to be a starting point for research. Created to house resources in a central location for educators and researchers.",
     category: "Food Systems",
@@ -382,7 +382,7 @@ export const resources: Resource[
 {
     id: "fs-25",
     title: "Traditional First Nations Foods: Gifts of the People",
-    url: "https://healthyschoolsbc.ca/wp-content/uploads/2021/09/Teach-Food-First-Gifts-of-the-People-6-8.pdf",
+    url: "https://www.healthlinkbc.ca/living-well/healthy-schools/teach-food-first/lesson-plans",
     organization: "BC Centre for Disease Control",
     summary: "Provides students with connections and reflections to the food and land around them. Uses food and culture pyramids to discuss food traditions and the impacts of colonization on traditional local food systems.",
     category: "Food Systems",
@@ -536,7 +536,7 @@ export const resources: Resource[
 {
     id: "ws-13",
     title: "Land & Water Rights: Pre-Lesson Preparation",
-    url: "https://civiced.org/elevating-unheard-perspectives/module2/prep",
+    url: "https://web.archive.org/web/20251208040450/https://civiced.org/elevating-unheard-perspectives/module2/prep",
     organization: "Center for Civic Education",
     summary: "In this lesson, students will explore the U.S. government’s use of annexation and eminent domain in both rural and Indigenous communities. Students will examine if rights have been protected or denied to these groups.",
     category: "Water Systems",
@@ -718,7 +718,7 @@ export const resources: Resource[
 {
     id: "ws-32",
     title: "siwɬkʷ Water Curriculum K-12 Teacher’s Resource Guide",
-    url: "https://syilx.org/siw%C9%ACk%CA%B7-water-curriculum-k-12-teachers-resource-guide/",
+    url: "https://learn.syilx.org/learning-resource/full-siw%C9%ACk%CA%B7-water-curriculum/",
     organization: "Okanagan Nation Alliance",
     summary: "This resource guide provides Syilx and non-Syilx educators, School Districts, and Band Schools with teaching materials and on-the-land activities featuring Syilx cultural perspectives and nsyilxcen language on the topic of water. The guide incorporates Syilx traditional water knowledge into the curriculum objectives based on the core competencies listed in B.C.’s new curriculum.",
     category: "Water Systems",
@@ -1096,7 +1096,7 @@ export const resources: Resource[
 {
     id: "ip-5",
     title: "Conservation Planning Curriculum for Native American Ranchers",
-    url: "https://www.firstnations.org/publications/conservation-planning-curriculum/",
+    url: "https://www.firstnations.org/resources/conservation-planning-curriculum/",
     organization: "First Nations Development Institute",
     summary: "This curriculum was created to assist Native American ranchers and community members in advancing ecological stewardship efforts. This curriculum will allow individuals to apply their land-based Native knowledge in conjunction with western science to develop a landowner-driven conservation plan.",
     category: "Indigenous Pedagogy",
@@ -1152,7 +1152,7 @@ export const resources: Resource[
 {
     id: "ip-11",
     title: "First Contact in the Americas",
-    url: "https://education.nationalgeographic.org/resource/first-contact-americas/",
+    url: "https://web.archive.org/web/20250121203119/https://education.nationalgeographic.org/resource/first-contact-americas/",
     organization: "National Geographic Society",
     summary: "This interactive timeline and resource guide helps students understand the concept of “first contact” between Indigenous and European groups in the Americas. It provides tips for educators on how to approach this topic in a culturally sensitive way.",
     category: "Indigenous Pedagogy",

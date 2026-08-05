@@ -57,13 +57,13 @@ console.log(`Parsed ${blocks.length} resources from resources.ts`);
 
 // ── Prompt construction ───────────────────────────────────────────────────────
 const SCENES = {
-  "Food Systems": "a thriving Indigenous Three Sisters garden — corn, beans and squash — or heritage seeds, traditional foods, or hands working desert farmland",
-  "Water Systems": "a desert river, irrigation acequia, water testing in a stream, monsoon rain over mesas, or hands cupping clear water",
+  "Food Systems": "a thriving Indigenous Three Sisters garden — corn, beans and squash — heritage seeds, traditional foods, garden beds, or desert farmland",
+  "Water Systems": "a desert river, irrigation acequia, a clear flowing stream, monsoon rain over mesas, or still water reflecting the sky",
   "Energy Systems": "solar panels above desert crops (agrivoltaics), golden sunlight on renewable energy infrastructure in Southwest tribal landscapes",
-  "Astronomy & Sky Knowledge": "a brilliant night sky over desert mesas — the Milky Way, constellations, or a warm campfire under the stars",
-  "Indigenous Pedagogy": "outdoor land-based learning — an educator and students in a garden, on desert land, or gathered in a learning circle",
+  "Astronomy & Sky Knowledge": "a brilliant night sky over desert mesas — the Milky Way, constellations, or a glowing campfire under the stars",
+  "Indigenous Pedagogy": "an empty outdoor learning place on desert land — a brush ramada, a circle of log benches by a garden, a winding trail through sage, teaching materials on a woven blanket",
   "Curriculum & Standards": "a warm teacher's workspace — printed lesson plans, woven textiles, natural materials, cornmeal and seeds arranged on a wooden desk",
-  "Learning Through Literature": "beautifully bound books, storytelling by warm light, or an open illustrated book with Southwest desert motifs",
+  "Learning Through Literature": "beautifully bound books, an open illustrated book with Southwest desert motifs, warm lamplight, woven textiles",
 };
 
 function promptFor(r) {
@@ -73,7 +73,8 @@ function promptFor(r) {
     `Depict: ${SCENES[r.category] || "desert land-based education"}.`,
     `This specific resource is about: "${r.title}"${focus ? ` (${focus})` : ""}. Let that guide the scene's details.`,
     `Golden-hour desert light. Earthy palette: terracotta, sage green, turquoise, ochre, warm cream.`,
-    `Respectful, natural, grounded. No text, no words, no logos, no watermarks, no borders. No close-up identifiable faces.`,
+    `Respectful, natural, grounded. STRICTLY NO PEOPLE: no human figures, no faces, no hands, no silhouettes of people. Landscapes, plants, objects, and sky only.`,
+    `No text, no words, no logos, no watermarks, no borders.`,
     `16:9 landscape composition, shallow depth of field, professional photography.`,
   ].join(" ");
 }
