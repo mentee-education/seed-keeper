@@ -119,83 +119,74 @@ export default function Videos() {
         </div>
       </section>
 
-      {/* Filters */}
+      {/* Filters — single-row tab bar on desktop, dropdown on mobile */}
       <div className="sticky top-[72px] md:top-[92px] z-40 bg-cream/95 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container py-4 flex flex-wrap items-start justify-between gap-x-8 gap-y-4">
-          <div className="flex-1 min-w-0">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-2">
-              Topic
-            </p>
-            {/* Mobile: compact dropdown so filters don't eat the screen */}
-            <div className="relative md:hidden">
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
-                  category !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
-                }`}
-              >
-                <option value="All">All Topics ({allVideos.length})</option>
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c} ({allVideos.filter((v) => v.category === c).length})
-                  </option>
-                ))}
-              </select>
-              <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-            </div>
-            {/* Desktop: pill group */}
-            <div className="hidden md:flex flex-wrap gap-2">
-              {["All", ...categories].map((c) => {
-                const n = c === "All" ? allVideos.length : allVideos.filter((v) => v.category === c).length;
-                const active = category === c;
-                return (
-                  <button
-                    key={c}
-                    onClick={() => setCategory(active && c !== "All" ? "All" : c)}
-                    className={`inline-flex items-center gap-2 pl-3.5 pr-2 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      active
-                        ? "bg-terracotta text-white shadow-sm ring-1 ring-terracotta"
-                        : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-terracotta/40 hover:bg-terracotta/5"
-                    }`}
-                  >
-                    {c === "All" ? "All Topics" : c}
-                    <span
-                      className={`min-w-[1.35rem] text-center px-1.5 py-px rounded-full text-[0.65rem] tabular-nums ${
-                        active ? "bg-white/20 text-white" : "bg-sand text-soil/70"
-                      }`}
-                    >
-                      {n}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+        <div className="container flex items-center gap-3 py-3 md:py-0">
+          {/* Mobile: compact dropdown so filters don't eat the screen */}
+          <div className="relative flex-1 min-w-0 md:hidden">
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
+                category !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
+              }`}
+            >
+              <option value="All">All Topics ({allVideos.length})</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c} ({allVideos.filter((v) => v.category === c).length})
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           </div>
-          <div className="shrink-0">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-2">
-              Grade Level
-            </p>
-            <div className="relative">
-              <select
-                value={grade}
-                onChange={(e) => setGrade(e.target.value)}
-                className={`appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 transition-all ${
-                  grade !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground hover:border-terracotta/40"
-                }`}
-              >
-                <option value="All">All Grades</option>
-                {grades.map((g) => (
-                  <option key={g} value={g}>Grades {g}</option>
-                ))}
-              </select>
-              <ChevronDown
-                size={13}
-                className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 ${
-                  grade !== "All" ? "text-terracotta" : "text-muted-foreground"
-                }`}
-              />
-            </div>
+
+          {/* Desktop: underline tab bar, one row, scrolls if tight */}
+          <nav className="hidden md:flex items-center flex-1 min-w-0 overflow-x-auto scrollbar-hide" aria-label="Filter videos by topic">
+            {["All", ...categories].map((c) => {
+              const n = c === "All" ? allVideos.length : allVideos.filter((v) => v.category === c).length;
+              const active = category === c;
+              return (
+                <button
+                  key={c}
+                  onClick={() => setCategory(active && c !== "All" ? "All" : c)}
+                  className={`relative whitespace-nowrap px-2.5 lg:px-3 py-4 text-[0.82rem] font-medium transition-colors ${
+                    active ? "text-terracotta" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {c === "All" ? "All Topics" : c}
+                  <span className={`ml-1 text-xs tabular-nums ${active ? "text-terracotta/70" : "text-muted-foreground/60"}`}>
+                    {n}
+                  </span>
+                  {active && (
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-terracotta rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Grade select — right-aligned, vertically centered */}
+          <div className="relative shrink-0">
+            <select
+              value={grade}
+              onChange={(e) => setGrade(e.target.value)}
+              aria-label="Filter videos by grade level"
+              className={`appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 transition-all ${
+                grade !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground hover:border-terracotta/40"
+              }`}
+            >
+              <option value="All">All Grades</option>
+              {grades.map((g) => (
+                <option key={g} value={g}>Grades {g}</option>
+              ))}
+            </select>
+            <ChevronDown
+              size={13}
+              className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 ${
+                grade !== "All" ? "text-terracotta" : "text-muted-foreground"
+              }`}
+            />
           </div>
         </div>
       </div>
