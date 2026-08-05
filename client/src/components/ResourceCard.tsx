@@ -6,7 +6,7 @@
   shows category-tinted fallback art, so missing images never break layout.
 */
 import { useState } from "react";
-import { type Resource, type ResourceType, getCategoryColor, CATEGORIES } from "@/data/resources";
+import { type Resource, type ResourceType, getCategoryColor } from "@/data/resources";
 import { getThumbUrl } from "@/lib/assets";
 import {
   ExternalLink,
@@ -45,9 +45,9 @@ const borderMap: Record<string, string> = {
   "Food Systems": "border-l-[oklch(0.55_0.13_40)]",
   "Water Systems": "border-l-[oklch(0.48_0.09_225)]",
   "Energy Systems": "border-l-[oklch(0.78_0.13_85)]",
-  "Astronomy & Sky Knowledge": "border-l-[oklch(0.30_0.04_55)]",
+  "Astronomy and Sky Knowledge": "border-l-[oklch(0.30_0.04_55)]",
   "Indigenous Pedagogy": "border-l-[oklch(0.65_0.06_155)]",
-  "Curriculum & Standards": "border-l-[oklch(0.72_0.08_40)]",
+  "Curriculum and Standards": "border-l-[oklch(0.72_0.08_40)]",
   "Learning Through Literature": "border-l-[oklch(0.90_0.06_85)]",
 };
 
@@ -56,18 +56,15 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
   const stripe = borderMap[resource.category] || "border-l-border";
   const type = typeStyle[resource.resourceType];
   // YouTube videos use their real YouTube thumbnail; everything else uses the
-  // per-resource photo, falling back to the category's photo. No icon placeholders.
-  const categoryImage = CATEGORIES.find((c) => c.name === resource.category)?.image;
-  const [src, setSrc] = useState(
+  // per-resource photo. RULE: a photo appears once on the site — if a resource
+  // has no photo of its own we show a quiet gradient, never a repeated image.
+  const [src] = useState(
     resource.youtubeId
       ? `https://i.ytimg.com/vi/${resource.youtubeId}/hqdefault.jpg`
       : getThumbUrl(resource.id)
   );
   const [hidden, setHidden] = useState(false);
-  const handleImgError = () => {
-    if (categoryImage && src !== categoryImage) setSrc(categoryImage);
-    else setHidden(true);
-  };
+  const handleImgError = () => setHidden(true);
 
   if (compact) {
     return (

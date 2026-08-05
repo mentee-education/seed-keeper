@@ -238,11 +238,11 @@ export default function Resources() {
           <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2">
             <button
               onClick={() => setSelectedCategory("All")}
-              className={`relative rounded-lg overflow-hidden group text-left h-24 transition-all ${
+              className={`relative rounded-lg overflow-hidden group text-left h-28 transition-all ${
                 selectedCategory === "All" ? "ring-2 ring-terracotta shadow-md" : "hover:shadow-md"
               }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-soil to-soil-light" />
+              <div className="absolute inset-0 bg-gradient-to-br from-terracotta to-[oklch(0.42_0.12_40)]" />
               <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
                 <span className="text-[0.7rem] font-semibold text-cream leading-tight">All Resources</span>
                 <span className="text-[0.6rem] text-cream/60">{categoryCounts["All"]} results</span>
@@ -253,7 +253,7 @@ export default function Resources() {
               <button
                 key={cat.name}
                 onClick={() => setSelectedCategory(selectedCategory === cat.name ? "All" : cat.name)}
-                className={`relative rounded-lg overflow-hidden group text-left h-24 transition-all ${
+                className={`relative rounded-lg overflow-hidden group text-left h-28 transition-all ${
                   selectedCategory === cat.name ? "ring-2 ring-terracotta shadow-md" : "hover:shadow-md"
                 } ${(categoryCounts[cat.name] || 0) === 0 ? "opacity-40 pointer-events-none" : ""}`}
               >
@@ -263,7 +263,7 @@ export default function Resources() {
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-soil/90 via-soil/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-soil/85 via-soil/20 to-transparent" />
                 <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
                   <span className="text-[0.7rem] font-semibold text-cream leading-tight">{cat.name}</span>
                   <span className="text-[0.6rem] text-cream/60">{categoryCounts[cat.name] || 0} resources</span>

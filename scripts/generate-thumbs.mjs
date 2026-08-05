@@ -80,7 +80,7 @@ const SCENES = {
     "power lines and a wind turbine on open rangeland under a big sky",
     "a weather monitoring station on a desert plot",
   ],
-  "Astronomy & Sky Knowledge": [
+  "Astronomy and Sky Knowledge": [
     "the Milky Way over a dark desert horizon",
     "a crescent moon and bright planets above mesa silhouettes at dusk",
     "star trails circling above a lone juniper tree",
@@ -94,7 +94,7 @@ const SCENES = {
     "a woven blanket on the ground holding river stones, corn, and a hand drum",
     "a garden gate standing open onto rows of young plants",
   ],
-  "Curriculum & Standards": [
+  "Curriculum and Standards": [
     "printed lesson plans and a pencil on a worn wooden desk",
     "a stack of three-ring binders beside a potted plant on a classroom shelf",
     "index cards, sticky notes and a planner spread on a work table",

@@ -18,9 +18,9 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "Food Systems": <Leaf className="w-6 h-6" />,
   "Water Systems": <Droplets className="w-6 h-6" />,
   "Energy Systems": <Sun className="w-6 h-6" />,
-  "Astronomy & Sky Knowledge": <Star className="w-6 h-6" />,
+  "Astronomy and Sky Knowledge": <Star className="w-6 h-6" />,
   "Indigenous Pedagogy": <BookOpen className="w-6 h-6" />,
-  "Curriculum & Standards": <FileText className="w-6 h-6" />,
+  "Curriculum and Standards": <FileText className="w-6 h-6" />,
   "Learning Through Literature": <BookOpenText className="w-6 h-6" />,
 };
 

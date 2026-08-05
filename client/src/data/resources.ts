@@ -25,9 +25,9 @@ export type Category =
   | "Food Systems"
   | "Water Systems"
   | "Energy Systems"
-  | "Astronomy & Sky Knowledge"
+  | "Astronomy and Sky Knowledge"
   | "Indigenous Pedagogy"
-  | "Curriculum & Standards"
+  | "Curriculum and Standards"
   | "Learning Through Literature";
 
 export type ResourceType =
@@ -70,7 +70,7 @@ export const CATEGORIES: { name: Category; icon: string; color: string; descript
     banner: `${R2_BASE}/catbanner-energy.jpg`
   },
   {
-    name: "Astronomy & Sky Knowledge",
+    name: "Astronomy and Sky Knowledge",
     icon: "⭐",
     color: "bg-soil",
     description: "Indigenous star knowledge, seasonal calendars, and night sky science.",
@@ -88,7 +88,7 @@ export const CATEGORIES: { name: Category; icon: string; color: string; descript
     banner: `${R2_BASE}/catbanner-pedagogy.jpg`
   },
   {
-    name: "Curriculum & Standards",
+    name: "Curriculum and Standards",
     icon: "📋",
     color: "bg-terracotta-light",
     description: "Diné culture and language standards, Arizona state standards, and lesson plan templates.",
@@ -987,7 +987,7 @@ export const resources: Resource[
 {
     id: "ask-collection",
     title: "Native Skywatchers Resource Collection",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     resourceType: "Website/Database",
     gradeLevel: "All",
     subject: "Science",
@@ -1004,7 +1004,7 @@ export const resources: Resource[
     url: "https://illuminative.org/wp-content/uploads/2022/06/Activity-4.3-5.NIEA-Illuminative_Ancient-Astronomy-Native-American-Star-Stories.Final_.pdf",
     organization: "Illuminative / NIEA",
     summary: "Activity featuring several star stories from different tribes as well as a map to study the stars in the night sky. After completing the activity, young people can practice being their own traditional astronomer.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "4-6",
     subject: "Science",
     audience: "Both",
@@ -1018,7 +1018,7 @@ export const resources: Resource[
     url: "https://www.nccie.ca/lessonplan/lessons-from-the-night-sky/",
     organization: "NCCIE",
     summary: "Series of 7 lesson activities to enrich students' understanding and appreciation of Indigenous Science and Western Science in astronomy. Students experience practices in thinking about Indigenous ways of knowing.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "7-8",
     subject: "Science",
     audience: "Educators",
@@ -1032,7 +1032,7 @@ export const resources: Resource[
     url: "https://astrobiology.nasa.gov/uploads/filer_public/d7/fd/d7fdeb5d-549c-4248-b219-02e3e125b56e/storystars-2.pdf",
     organization: "NASA",
     summary: "Educational activities that weave together NASA science and Navajo knowledge of the stars. Intended for use in classrooms and community-based educational events.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "All",
     subject: "Science",
     audience: "Both",
@@ -1312,7 +1312,7 @@ export const resources: Resource[
     url: "https://cadrek12.org/resources/cris-7e-lesson-plan-template",
     organization: "Washington State University",
     summary: "The CRIS “7e” lesson plan template, adapted from the Next Generation Science “5e”, centers the importance of including Elders and Environment in Indigenous STEM teaching and learning. The template is a way for teachers to weave Traditional Ecological Knowledge (TEK) and Western Science into lessons, and has been formative in helping team members integrate community knowledge and land-based education into science learning experiences.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Science",
     audience: "Educators",
@@ -1326,7 +1326,7 @@ export const resources: Resource[
     url: "https://in.nau.edu/wp-content/uploads/sites/101/2021/10/CRAIS-Tool-Oct-2021.pdf",
     organization: "Northern Arizona University",
     summary: "A tool for educators and researchers to assess the degree to which core principles of culturally responsive schooling are present in schools serving high numbers of Indigenous students.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1340,7 +1340,7 @@ export const resources: Resource[
     url: "https://ies.ed.gov/ncee/rel/regions/pacific/pdf/RELPA_CulturallyResponsiveAssessmentIndigenous_508c.pdf",
     organization: "Institute of Education Sciences (IES)",
     summary: "This infographic summarizes six salient features of assessments that are discussed in key peer-reviewed articles on culturally responsive assessment for Indigenous students. The considerations can be used as a jumping-off point for conversations and decision making concerning assessments.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1354,7 +1354,7 @@ export const resources: Resource[
     url: "https://americanindian.si.edu/nk360/about/essential-understandings",
     organization: "Smithsonian National Museum of the American Indian",
     summary: "The Native Knowledge 360° Framework for Essential Understandings about American Indians offers possibilities for creating new student learning experiences. It provides a framework for educators to understand the rich and diverse cultures, histories, and contemporary lives of Native peoples.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Social Studies",
     audience: "Educators",
@@ -1368,7 +1368,7 @@ export const resources: Resource[
     url: "https://www.pbslearningmedia.org/resource/vtl07.la.rv.text.lpinfluence/identify-cultural-influences-hiawatha/",
     organization: "PBS LearningMedia",
     summary: "In this lesson plan, students identify aspects of Native American life represented in Henry Wadsworth Longfellow's epic poem, “The Song of Hiawatha.” This lesson helps learners expand their thinking and their comprehension of texts when they consider how culture influences the characters and plot.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "4-6",
     subject: "ELA",
     audience: "Educators",
@@ -1382,7 +1382,7 @@ export const resources: Resource[
     url: "https://nvsd44curriculumhub.ca/indigenous-education-planning/",
     organization: "North Vancouver School District",
     summary: "This resource provides a collection of interdisciplinary unit plans for K-12 that integrate Indigenous perspectives and content. The unit plans cover a range of subjects, including social studies, math, art, and language arts.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1396,7 +1396,7 @@ export const resources: Resource[
     url: "https://www.nccie.ca/teaching-resource-centre/templates/",
     organization: "The National Centre for Collaboration in Indigenous Education (NCCIE)",
     summary: "This is a lesson plan template designed with an Indigenous lens for K-12 educators. It can be used to develop lesson plans for different subjects such as math, science, etc.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1410,7 +1410,7 @@ export const resources: Resource[
     url: "https://americanindian.si.edu/nk360/lessons-resources/search-resources",
     organization: "Smithsonian NMAI",
     summary: "Searchable database of lesson plans and educational resources for K-12 educators covering a wide range of topics related to Native American history, culture, and contemporary issues.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1424,7 +1424,7 @@ export const resources: Resource[
     url: "https://americanindian.si.edu/nk360/resources/Native-American-Representation-STEM-Indigenous-Innovation",
     organization: "Smithsonian, National Museum of the American Indian",
     summary: "This reference guide introduces Indigenous innovations in STEM, rooted in thousands of years of knowledge. It provides resources to demonstrate these concepts in the classroom and show how Indigenous expertise continues to offer solutions to modern-day issues.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Science",
     audience: "Educators",
@@ -1438,7 +1438,7 @@ export const resources: Resource[
     url: "https://www.chinleusd.k12.az.us/m/pages/index.jsp?uREC_ID=432880&type=d&termREC_ID=&pREC_ID=838616",
     organization: "Chinle Unified School District",
     summary: "Chinle Unified School District curriculum units for Navajo Language and Culture are aligned to standards developed by the Diné Department of Education (DODE). The standards are organized in grade spans of Prek-3, 4-6, 7-8 and 9-12 and cover themes of Character Development, Government, Culture, Language, and History.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Social Studies",
     audience: "Educators",
@@ -1452,7 +1452,7 @@ export const resources: Resource[
     url: "https://stemteachingtools.org/news/2021/resource-collection-on-indigenous-science-stem",
     organization: "STEM Teaching Tools",
     summary: "This resource is a curated collection of Indigenous resources related to science and STEM education in support of the NGSS / Framework vision. The resources can help educators think through how Indigenous history, lifeways, current efforts, and future goals can be made a widespread focus of science instruction in respectful and concrete ways.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Science",
     audience: "Educators",
@@ -1466,7 +1466,7 @@ export const resources: Resource[
     url: "https://in.nau.edu/institute-native-serving-educators/curricula-resources/",
     organization: "Northern Arizona University",
     summary: "Collection of teacher-authored curriculum units and practice guides. Educators can search for resources by author, grade level, or subject area. Designed to be culturally responsive and relevant for Native students.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1480,7 +1480,7 @@ export const resources: Resource[
     url: "https://www.waldorfcurriculum.com/",
     organization: "Waldorf Curriculum",
     summary: "Website link to Waldorf curriculum resources, providing holistic educational approaches that complement Indigenous pedagogical methods.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -1998,7 +1998,7 @@ export const resources: Resource[
     url: "https://docs.google.com/presentation/d/1eVp77YvX3E54f-WVOvjy6obvtR7Zp26-/edit?usp=sharing&ouid=115394192045098768127&rtpof=true&sd=true",
     organization: "STAR School / Native FEWS Alliance",
     summary: "Workshop slides covering Native FEWS project goals, aligned with Diné Fundamentals, timeline, and Rose/Bud/Thorn reflection activities.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "All",
     audience: "Educators",
@@ -2012,7 +2012,7 @@ export const resources: Resource[
     url: "https://docs.google.com/document/d/1ItiwzwTxT-60HW1ko8hEAJktFF7PLzRg/edit?usp=sharing&ouid=115394192045098768127&rtpof=true&sd=true",
     organization: "STAR School / Native FEWS Alliance",
     summary: "Amplify grade level units for STAR School and a reading for health benefits of Minoomin. Also includes a reference to an outline for service learning class at STAR School.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Science",
     audience: "Educators",
@@ -2026,7 +2026,7 @@ export const resources: Resource[
     url: "https://drive.google.com/file/d/1iyMZ9urbqBcTrBBZDDrk0plMaP1W1qJn/view?usp=drive_link",
     organization: "STAR School / Native FEWS Alliance",
     summary: "Weaving lesson to understand history of Navajo weaving, how weaving has changed, and how to create a loom and begin basic weaving. Standards-aligned.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Art",
     audience: "Educators",
@@ -2040,7 +2040,7 @@ export const resources: Resource[
     url: "https://docs.google.com/presentation/d/1eVp77YvX3E54f-WVOvjy6obvtR7Zp26-/edit?usp=sharing&ouid=115394192045098768127&rtpof=true&sd=true",
     organization: "STAR School / Native FEWS Alliance",
     summary: "Workshop slides with Native FEWS focus, incorporating Navajo Pedagogy and corn-based learning activities.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Science",
     audience: "Educators",
@@ -2054,7 +2054,7 @@ export const resources: Resource[
     url: "https://docs.google.com/presentation/d/1CM_zEFMdtd0JrTRNQp7bbRxBEYsZIz3h/edit?usp=drive_link&ouid=115394192045098768127&rtpof=true&sd=true",
     organization: "STAR School / Native FEWS Alliance",
     summary: "Weaving workshop slides with plants and weaving examples, connecting traditional textile arts with science and cultural learning.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Art",
     audience: "Both",
@@ -2110,7 +2110,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=FohoDSrFb5o",
     organization: "Native Skywatchers",
     summary: "Ojibwe elder-artist Carl Gawboy introduces the Wintermaker constellation from the Native Skywatchers project, showing how Ojibwe star knowledge maps onto the winter sky.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "4-6",
     subject: "Science",
     audience: "Both",
@@ -2125,7 +2125,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=RHfKlwJox7g",
     organization: "Exploratorium",
     summary: "Diné astronomer Dr. David Begay explains Navajo cosmology and how Indigenous star knowledge complements Western astronomy, presented by the Exploratorium science museum.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "9-12",
     subject: "Science",
     audience: "Both",
@@ -2140,7 +2140,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=gYWyIISAMGs",
     organization: "NASA Astrobiology",
     summary: "NASA partners with Navajo educators to share Diné constellation stories and the cultural teachings embedded in the night sky.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "7-8",
     subject: "Science",
     audience: "Both",
@@ -2155,7 +2155,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=0amtjdLV1vE",
     organization: "NASA Astrobiology",
     summary: "NASA and Diné knowledge holders explore the moon's role in Navajo tradition, connecting lunar science with Indigenous timekeeping and seasonal knowledge.",
-    category: "Astronomy & Sky Knowledge",
+    category: "Astronomy and Sky Knowledge",
     gradeLevel: "7-8",
     subject: "Science",
     audience: "Both",
@@ -2380,7 +2380,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=1LiIScyvvds",
     organization: "Common Sense Education",
     summary: "Teacher-facing walkthrough of the Smithsonian's Native Knowledge 360° resources and how to use them to teach accurate, standards-aligned Native American content.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "All",
     subject: "Social Studies",
     audience: "Both",
@@ -2395,7 +2395,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=yPEuQNp0nII",
     organization: "Smithsonian NMAI",
     summary: "The National Museum of the American Indian unpacks the myth of the First Thanksgiving and models how to teach the holiday's real history.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "7-8",
     subject: "Social Studies",
     audience: "Both",
@@ -2410,7 +2410,7 @@ export const resources: Resource[
     url: "https://www.youtube.com/watch?v=z6RP2S1TR-M",
     organization: "PBS Origins",
     summary: "PBS Origins explains federal recognition, tribal sovereignty, and why recognition status matters for teaching about Native nations today.",
-    category: "Curriculum & Standards",
+    category: "Curriculum and Standards",
     gradeLevel: "9-12",
     subject: "Social Studies",
     audience: "Both",
@@ -2486,9 +2486,9 @@ export function getCategoryColor(category: Category): string {
     case "Food Systems": return "bg-[oklch(0.55_0.13_40)] text-white";
     case "Water Systems": return "bg-[oklch(0.48_0.09_225)] text-white";
     case "Energy Systems": return "bg-[oklch(0.78_0.13_85)] text-[oklch(0.25_0.03_55)]";
-    case "Astronomy & Sky Knowledge": return "bg-[oklch(0.30_0.04_55)] text-white";
+    case "Astronomy and Sky Knowledge": return "bg-[oklch(0.30_0.04_55)] text-white";
     case "Indigenous Pedagogy": return "bg-[oklch(0.65_0.06_155)] text-white";
-    case "Curriculum & Standards": return "bg-[oklch(0.72_0.08_40)] text-white";
+    case "Curriculum and Standards": return "bg-[oklch(0.72_0.08_40)] text-white";
     case "Learning Through Literature": return "bg-[oklch(0.90_0.06_85)] text-[oklch(0.25_0.03_55)]";
     default: return "bg-muted text-muted-foreground";
   }

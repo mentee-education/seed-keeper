@@ -103,12 +103,12 @@ export default function Footer() {
 
       {/* Developed by Mentee — civicfirm pattern, color-matched */}
       <div className="bg-cream border-t border-border">
-        <div className="container py-4 flex items-center justify-center gap-4">
-          <span className="text-xs uppercase font-medium tracking-[0.25em] text-soil/60">
+        <div className="container py-6 flex items-center justify-center gap-4">
+          <span className="text-sm uppercase font-medium tracking-[0.25em] text-soil/70">
             Developed by
           </span>
           <a href="https://mentee.ca" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-            <img src="/mentee-logo.svg" alt="Mentee" className="h-7 w-auto brightness-0 opacity-70" />
+            <img src="/mentee-logo.svg" alt="Mentee" className="h-9 w-auto brightness-0 opacity-75" />
           </a>
         </div>
       </div>
