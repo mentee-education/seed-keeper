@@ -8,7 +8,7 @@ export const IMAGES = {
   heroMain: `${R2}/hero-garden.jpg`,
   heroWater: `${R2}/hero-water.webp`,
   heroEnergy: `${R2}/hero-energy.webp`,
-  heroStars: `${R2}/hero-stars.webp`,
+  heroStars: `${R2}/hero-stars.jpg`,
   indigenousGarden: `${R2}/indigenous-garden.webp`,
   logo: `${R2}/logo-mark.png`,
   logoDark: `${R2}/logo-mark-dark.png`,

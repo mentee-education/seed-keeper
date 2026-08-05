@@ -52,7 +52,14 @@ const blocks = src
       focusArea: field(chunk, "focusArea"),
     };
   })
-  .filter((r) => r.id && r.title && r.category);
+  .filter((r) => r.id && r.title && r.category)
+  // YouTube-hosted videos use their real YouTube thumbnails — never spend
+  // generation credits on them
+  .filter((r) => !r.id.startsWith("yt-") && !chunkHasYoutube(r.id, src));
+function chunkHasYoutube(id, source) {
+  const m = source.match(new RegExp(`id: "${id}"[\\s\\S]*?\\n  \\}`));
+  return m ? /youtubeId: "/.test(m[0]) : false;
+}
 console.log(`Parsed ${blocks.length} resources from resources.ts`);
 
 // ── Prompt construction ───────────────────────────────────────────────────────
@@ -91,7 +98,7 @@ const SCENES = {
     "an empty brush ramada shelter over a dirt floor classroom space",
     "a circle of log benches around a cold fire ring near a garden",
     "a footpath winding through sage brush toward mesas",
-    "a woven blanket on the ground holding river stones, corn, and a hand drum",
+    "an open field notebook and a pot of young corn seedlings on an outdoor wooden table",
     "a garden gate standing open onto rows of young plants",
   ],
   "Curriculum and Standards": [
@@ -99,12 +106,12 @@ const SCENES = {
     "a stack of three-ring binders beside a potted plant on a classroom shelf",
     "index cards, sticky notes and a planner spread on a work table",
     "an open filing box of labeled folders in warm window light",
-    "a chalkboard-side desk with papers, seeds in a dish, and a woven mat",
+    "a chalkboard-side desk with papers, seeds in a dish, and a clay pot of pencils",
   ],
   "Learning Through Literature": [
     "a stack of well-used hardcover books on a wooden table",
     "an open picture book showing desert landscape illustrations",
-    "a reading nook with a woven blanket and a shelf of books",
+    "a reading chair beside a bright window with books stacked on the sill",
     "a single book lying on a porch rail with desert beyond",
     "library shelves in warm light, spines slightly worn",
   ],
@@ -146,6 +153,7 @@ function promptFor(r) {
     `Looks like a real photo from a working archive: natural color grading, realistic exposure, subtle imperfections, shot on 35mm film. NOT oversaturated, NOT HDR, NOT dreamy or cinematic, no fantasy elements.`,
     `Earthy palette bias: terracotta, sage, ochre, warm neutrals.`,
     `STRICTLY NO PEOPLE: no human figures, no faces, no hands, no silhouettes. No text, no words, no logos, no watermarks, no borders.`,
+    `CULTURAL RESPECT — do NOT depict ceremonial or sacred objects: no drums, no smudge or sage bundles, no pipes, no feathers or regalia, no dreamcatchers. Do NOT invent Indigenous-style patterns, weavings, beadwork, petroglyphs, rock art, pottery designs, or symbols. Any textiles or pottery must be plain and unpatterned. Books must have plain, unmarked covers and spines.`,
     `16:9 landscape composition.`,
   ].join(" ");
 }
