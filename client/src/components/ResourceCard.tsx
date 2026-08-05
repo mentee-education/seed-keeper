@@ -1,9 +1,13 @@
 /*
   DESIGN: "Living Earth" — Regenerative Design
-  ResourceCard: Two modes — full card (grid) and compact row (list)
-  Compact mode: single-row on desktop, tight two-line on mobile
+  ResourceCard: Two modes — full card (grid, with photographic thumbnail)
+  and compact row (list, with small thumb on desktop).
+  Thumbnails come from R2 (thumbs/<id>.webp); until one exists the card
+  shows category-tinted fallback art, so missing images never break layout.
 */
-import { type Resource, type ResourceType, getCategoryColor } from "@/data/resources";
+import { useState } from "react";
+import { type Resource, type ResourceType, getCategoryColor, CATEGORIES } from "@/data/resources";
+import { getThumbUrl } from "@/lib/assets";
 import {
   ExternalLink,
   Calendar,
@@ -47,10 +51,27 @@ const borderMap: Record<string, string> = {
   "Learning Through Literature": "border-l-[oklch(0.90_0.06_85)]",
 };
 
+// Category-tinted gradient shown while a resource has no generated thumbnail
+const fallbackArtMap: Record<string, string> = {
+  "Food Systems": "from-[oklch(0.90_0.05_40)] to-[oklch(0.80_0.08_40)]",
+  "Water Systems": "from-[oklch(0.90_0.04_225)] to-[oklch(0.78_0.06_225)]",
+  "Energy Systems": "from-[oklch(0.94_0.05_85)] to-[oklch(0.85_0.09_85)]",
+  "Astronomy & Sky Knowledge": "from-[oklch(0.45_0.05_280)] to-[oklch(0.28_0.05_280)]",
+  "Indigenous Pedagogy": "from-[oklch(0.90_0.04_155)] to-[oklch(0.78_0.06_155)]",
+  "Curriculum & Standards": "from-[oklch(0.92_0.03_40)] to-[oklch(0.83_0.05_40)]",
+  "Learning Through Literature": "from-[oklch(0.94_0.04_85)] to-[oklch(0.86_0.06_85)]",
+};
+
+function categoryIcon(category: string): string {
+  return CATEGORIES.find((c) => c.name === category)?.icon ?? "🌱";
+}
+
 export default function ResourceCard({ resource, compact = false }: ResourceCardProps) {
   const hasLink = resource.url && resource.url !== "#" && resource.url.startsWith("http");
   const stripe = borderMap[resource.category] || "border-l-border";
   const type = typeStyle[resource.resourceType];
+  const [imgOk, setImgOk] = useState(true);
+  const thumb = getThumbUrl(resource.id);
 
   if (compact) {
     return (
@@ -59,6 +80,17 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
       >
         {/* Desktop: single row layout */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Thumb */}
+          {imgOk && (
+            <img
+              src={thumb}
+              alt=""
+              loading="lazy"
+              onError={() => setImgOk(false)}
+              className="w-16 h-11 rounded-md object-cover shrink-0"
+            />
+          )}
+
           {/* Category badge — fixed width */}
           <span className={`text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
             {resource.category}
@@ -162,87 +194,110 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
     );
   }
 
-  // Full card mode (grid view)
+  // Full card mode (grid view) — photographic thumbnail on top, civix-style
   return (
     <article
-      className={`group bg-card rounded-lg border border-border/60 ${stripe} border-l-[3px] transition-all duration-300 hover:shadow-lg hover:shadow-soil/5 hover:-translate-y-0.5 p-5 md:p-6`}
+      className={`group bg-card rounded-xl border border-border/60 ${stripe} border-l-[3px] overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-soil/10 hover:-translate-y-0.5 flex flex-col h-full`}
     >
-      {/* Top row: category badge + type */}
-      <div className="flex items-center justify-between gap-2 mb-3">
-        <span className={`text-[0.65rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${getCategoryColor(resource.category)}`}>
+      {/* Thumbnail */}
+      <div className="relative h-40 overflow-hidden shrink-0">
+        {imgOk ? (
+          <img
+            src={thumb}
+            alt=""
+            loading="lazy"
+            onError={() => setImgOk(false)}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div
+            className={`w-full h-full bg-gradient-to-br ${fallbackArtMap[resource.category] || "from-sand to-secondary"} flex items-center justify-center`}
+          >
+            <span className="text-4xl opacity-50">{categoryIcon(resource.category)}</span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-soil/60 via-transparent to-transparent" />
+        {/* Category badge overlaid */}
+        <span className={`absolute bottom-2 left-3 text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm ${getCategoryColor(resource.category)}`}>
           {resource.category}
         </span>
-        <span
-          className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold px-2 py-0.5 rounded-full shrink-0 ${type.badge}`}
-        >
-          {type.icon}
-          <span className="hidden sm:inline">{resource.resourceType}</span>
-        </span>
-      </div>
-
-      {/* Title */}
-      <h3 className="font-serif text-lg text-foreground leading-snug mb-2 group-hover:text-terracotta transition-colors">
-        {resource.title}
-      </h3>
-
-      {/* Organization */}
-      <p className="text-xs font-medium text-terracotta/80 mb-2">
-        {resource.organization}
-      </p>
-
-      {/* Summary */}
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
-        {resource.summary}
-      </p>
-
-      {/* Tags row */}
-      <div className="flex flex-wrap gap-1.5 mb-3">
         {resource.gradeLevel && resource.gradeLevel !== "All" && (
-          <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-sand text-soil font-medium">
+          <span className="absolute bottom-2 right-3 text-[0.6rem] px-2 py-0.5 rounded-full bg-cream/90 text-soil font-semibold shadow-sm">
             Grades {resource.gradeLevel}
           </span>
         )}
-        {resource.subject && resource.subject !== "All" && (
-          <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-sage-light/50 text-sage font-medium">
-            {resource.subject}
-          </span>
-        )}
-        {resource.audience && resource.audience !== "Both" && (
-          <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-golden-light/50 text-soil font-medium">
-            {resource.audience}
-          </span>
-        )}
-        {resource.focusArea && (
-          <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-turquoise-light/30 text-turquoise font-medium hidden sm:inline-flex">
-            {resource.focusArea}
-          </span>
-        )}
       </div>
 
-      {/* Seasonal note */}
-      {resource.seasonal && (
-        <div className="flex items-center gap-1.5 text-xs text-turquoise mb-3">
-          <Calendar size={12} />
-          <span>{resource.seasonal}</span>
+      <div className="p-4 md:p-5 flex flex-col gap-2 flex-1">
+        {/* Type badge row */}
+        <div className="flex items-center justify-between gap-2">
+          <span
+            className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold px-2 py-0.5 rounded-full ${type.badge}`}
+          >
+            {type.icon}
+            {resource.resourceType}
+          </span>
+          {resource.audience && resource.audience !== "Both" && (
+            <span className="text-[0.65rem] text-muted-foreground shrink-0">{resource.audience}</span>
+          )}
         </div>
-      )}
 
-      {/* Link */}
-      {hasLink ? (
-        <a
-          href={resource.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-light transition-colors no-underline group/link"
-        >
-          View Resource
-          <ExternalLink size={13} className="transition-transform group-hover/link:translate-x-0.5" />
-        </a>
-      ) : (
-        <span className="text-xs text-muted-foreground/60 italic">
-          Available through workshop partners
-        </span>
-      )}
+        {/* Title */}
+        <h3 className="font-serif text-lg text-foreground leading-snug group-hover:text-terracotta transition-colors">
+          {resource.title}
+        </h3>
+
+        {/* Organization */}
+        <p className="text-xs font-medium text-terracotta/80">
+          {resource.organization}
+        </p>
+
+        {/* Summary */}
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+          {resource.summary}
+        </p>
+
+        {/* Tags row */}
+        <div className="flex flex-wrap gap-1.5">
+          {resource.subject && resource.subject !== "All" && (
+            <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-sage-light/50 text-sage font-medium">
+              {resource.subject}
+            </span>
+          )}
+          {resource.focusArea && (
+            <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-turquoise-light/30 text-turquoise font-medium">
+              {resource.focusArea}
+            </span>
+          )}
+        </div>
+
+        {/* Seasonal note */}
+        {resource.seasonal && (
+          <div className="flex items-center gap-1.5 text-xs text-turquoise">
+            <Calendar size={12} />
+            <span>{resource.seasonal}</span>
+          </div>
+        )}
+
+        {/* Link — pinned to card bottom */}
+        <div className="mt-auto pt-2">
+          {hasLink ? (
+            <a
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-light transition-colors no-underline group/link"
+            >
+              View Resource
+              <ExternalLink size={13} className="transition-transform group-hover/link:translate-x-0.5" />
+            </a>
+          ) : (
+            <span className="text-xs text-muted-foreground/60 italic">
+              Available through workshop partners
+            </span>
+          )}
+        </div>
+      </div>
     </article>
   );
 }

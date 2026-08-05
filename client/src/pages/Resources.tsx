@@ -21,6 +21,7 @@ import {
   type Category,
   type ResourceType,
 } from "@/data/resources";
+import { IMAGES } from "@/lib/assets";
 
 const BATCH_SIZE = 36;
 
@@ -49,7 +50,7 @@ export default function Resources() {
   const [selectedType, setSelectedType] = useState<ResourceType | "All">("All");
   const [selectedAudience, setSelectedAudience] = useState("All");
   const [sortBy, setSortBy] = useState<SortOption>("title-asc");
-  const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+  const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
   const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -206,26 +207,70 @@ export default function Resources() {
     return counts;
   }, [searchQuery, selectedGrade, selectedSubject, selectedType, selectedAudience]);
 
-  // Only show categories that have results
-  const visibleCategories = CATEGORIES.filter((cat) => (categoryCounts[cat.name] || 0) > 0);
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
 
-      {/* Header */}
-      <section className="bg-sand border-b border-border">
-        <div className="container py-8 md:py-12">
-          <p className="text-terracotta text-sm font-semibold uppercase tracking-[0.15em] mb-2">
+      {/* Header — photographic band */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={IMAGES.heroMain} alt="" className="w-full h-full object-cover" style={{ objectPosition: "center 40%" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-soil/90 via-soil/70 to-soil/40" />
+        </div>
+        <div className="relative container py-10 md:py-14">
+          <p className="text-golden text-sm font-semibold uppercase tracking-[0.15em] mb-2">
             Resource Library
           </p>
-          <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-2">
+          <h1 className="font-serif text-3xl md:text-4xl text-cream mb-2">
             Explore All Resources
           </h1>
-          <p className="text-muted-foreground max-w-2xl leading-relaxed text-sm md:text-base">
+          <p className="text-cream/70 max-w-2xl leading-relaxed text-sm md:text-base">
             {resources.length} curated resources spanning food sovereignty,
             water systems, renewable energy, Indigenous astronomy, and culturally responsive pedagogy.
           </p>
+        </div>
+      </section>
+
+      {/* Category tiles — image cards that filter the library */}
+      <section className="bg-cream border-b border-border">
+        <div className="container py-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2">
+            <button
+              onClick={() => setSelectedCategory("All")}
+              className={`relative rounded-lg overflow-hidden group text-left h-24 transition-all ${
+                selectedCategory === "All" ? "ring-2 ring-terracotta shadow-md" : "hover:shadow-md"
+              }`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-soil to-soil-light" />
+              <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
+                <span className="text-[0.7rem] font-semibold text-cream leading-tight">All Resources</span>
+                <span className="text-[0.6rem] text-cream/60">{categoryCounts["All"]} results</span>
+              </div>
+              {selectedCategory === "All" && <ActiveDot />}
+            </button>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => setSelectedCategory(selectedCategory === cat.name ? "All" : cat.name)}
+                className={`relative rounded-lg overflow-hidden group text-left h-24 transition-all ${
+                  selectedCategory === cat.name ? "ring-2 ring-terracotta shadow-md" : "hover:shadow-md"
+                } ${(categoryCounts[cat.name] || 0) === 0 ? "opacity-40 pointer-events-none" : ""}`}
+              >
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-soil/90 via-soil/40 to-transparent" />
+                <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
+                  <span className="text-[0.7rem] font-semibold text-cream leading-tight">{cat.name}</span>
+                  <span className="text-[0.6rem] text-cream/60">{categoryCounts[cat.name] || 0} resources</span>
+                </div>
+                {selectedCategory === cat.name && <ActiveDot />}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -250,30 +295,6 @@ export default function Resources() {
                 <X size={14} />
               </button>
             )}
-          </div>
-        </div>
-
-        {/* Category Pills — dynamic, only show categories with results */}
-        <div className="container pb-3">
-          <div className="flex flex-wrap justify-center gap-2 xl:grid xl:grid-cols-4 xl:gap-2">
-            <CategoryPill
-              active={selectedCategory === "All"}
-              onClick={() => setSelectedCategory("All")}
-              count={categoryCounts["All"]}
-            >
-              All
-            </CategoryPill>
-            {visibleCategories.map((cat) => (
-              <CategoryPill
-                key={cat.name}
-                active={selectedCategory === cat.name}
-                onClick={() => setSelectedCategory(cat.name)}
-                count={categoryCounts[cat.name] || 0}
-                icon={cat.icon}
-              >
-                {cat.name}
-              </CategoryPill>
-            ))}
           </div>
         </div>
 
@@ -413,7 +434,7 @@ export default function Resources() {
           ) : (
             <>
               {/* Resource Display */}
-              <div className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
+              <div className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "flex flex-col gap-3"}>
                 {visibleResources.map((resource, i) => (
                   <motion.div
                     key={resource.id}
@@ -453,36 +474,11 @@ export default function Resources() {
 
 /* ===== Sub-Components ===== */
 
-function CategoryPill({
-  active,
-  onClick,
-  children,
-  count,
-  icon,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-  count?: number;
-  icon?: string;
-}) {
+function ActiveDot() {
   return (
-    <button
-      onClick={onClick}
-      className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all text-center ${
-        active
-          ? "bg-terracotta text-white shadow-sm"
-          : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-terracotta/30 hover:bg-terracotta/5"
-      }`}
-    >
-      {icon && <span className="text-xs sm:text-sm">{icon}</span>}
-      <span className="truncate">{children}</span>
-      {count !== undefined && (
-        <span className={`text-[0.65rem] sm:text-xs ${active ? "text-white/70" : "text-muted-foreground/50"}`}>
-          {count}
-        </span>
-      )}
-    </button>
+    <span className="absolute top-2 right-2 bg-terracotta text-white text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide shadow">
+      Active
+    </span>
   );
 }
 
