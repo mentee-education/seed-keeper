@@ -126,7 +126,26 @@ export default function Videos() {
             <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/80 mb-2">
               Topic
             </p>
-            <div className="flex flex-wrap gap-2">
+            {/* Mobile: compact dropdown so filters don't eat the screen */}
+            <div className="relative md:hidden">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className={`w-full appearance-none border rounded-full pl-3.5 pr-8 py-1.5 text-xs font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-terracotta/30 ${
+                  category !== "All" ? "bg-terracotta/5 border-terracotta/30 text-terracotta" : "bg-card border-border text-foreground"
+                }`}
+              >
+                <option value="All">All Topics ({allVideos.length})</option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c} ({allVideos.filter((v) => v.category === c).length})
+                  </option>
+                ))}
+              </select>
+              <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+            </div>
+            {/* Desktop: pill group */}
+            <div className="hidden md:flex flex-wrap gap-2">
               {["All", ...categories].map((c) => {
                 const n = c === "All" ? allVideos.length : allVideos.filter((v) => v.category === c).length;
                 const active = category === c;
