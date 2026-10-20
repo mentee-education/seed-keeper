@@ -1,6 +1,6 @@
 /*
   DESIGN: "Living Earth" — Regenerative Design
-  Navbar: mentee.ca-matched proportions — tall bar, large logo mark with
+  Navbar: tall bar, large logo mark with
   wordmark + tagline context, pill-style nav links with filled active state.
 */
 import { useState, useEffect } from "react";

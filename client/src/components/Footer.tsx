@@ -1,7 +1,6 @@
 /*
   DESIGN: "Living Earth" — Regenerative Design
   Footer: light sand ground, dark soil text — same logo mark as the navbar.
-  Ends with the civicfirm-style "Developed by Mentee" band, color-matched.
 */
 import { Link } from "wouter";
 import { IMAGES } from "@/lib/assets";
@@ -98,18 +97,6 @@ export default function Footer() {
           <p className="text-xs text-muted-foreground/70">
             seedkeeper.org
           </p>
-        </div>
-      </div>
-
-      {/* Developed by Mentee — civicfirm pattern, color-matched */}
-      <div className="bg-cream border-t border-border">
-        <div className="container py-6 flex items-center justify-center gap-4">
-          <span className="text-sm uppercase font-medium tracking-[0.25em] text-soil/70">
-            Developed by
-          </span>
-          <a href="https://mentee.ca" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-            <img src="/mentee-logo.svg" alt="Mentee" className="h-9 w-auto brightness-0 opacity-75" />
-          </a>
         </div>
       </div>
     </footer>
