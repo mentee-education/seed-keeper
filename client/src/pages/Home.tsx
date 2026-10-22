@@ -129,13 +129,13 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
                 <Link
                   href="/resources"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-golden hover:text-golden-light transition-colors no-underline"
+                  className="inline-flex items-center gap-1.5 py-0.5 -my-0.5 text-sm font-medium text-golden hover:text-golden-light transition-colors no-underline"
                 >
                   Browse all resources <ArrowRight size={14} />
                 </Link>
                 <Link
                   href="/about"
-                  className="text-sm text-cream/60 hover:text-cream transition-colors no-underline"
+                  className="py-0.5 -my-0.5 text-sm text-cream/60 hover:text-cream transition-colors no-underline"
                 >
                   About the workshop
                 </Link>
@@ -149,7 +149,7 @@ export default function Home() {
                 ].map((s) => (
                   <div key={s.label}>
                     <p className="font-serif text-2xl text-cream leading-none">{s.n}</p>
-                    <p className="text-[0.65rem] font-semibold text-cream/50 uppercase tracking-wide mt-1">
+                    <p className="text-[0.6875rem] font-semibold text-cream/50 uppercase tracking-wide mt-1">
                       {s.label}
                     </p>
                   </div>

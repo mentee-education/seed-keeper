@@ -51,6 +51,19 @@ const borderMap: Record<string, string> = {
   "Learning Through Literature": "border-l-[oklch(0.90_0.06_85)]",
 };
 
+// Thumbnails whose subject would be cut by a centred crop: keep heads in frame
+// (top) or show the whole picture (contain) for book covers and artwork.
+const thumbFit: Record<string, string> = {
+  "ltl-18": "object-contain bg-soil",
+  "ip-8": "object-contain bg-soil",
+  "ltl-20": "object-cover object-[50%_30%]",
+  "fs-8": "object-cover object-top",
+  "es-17": "object-cover object-top",
+  "ask-32": "object-cover object-top",
+  "ask-29": "object-cover object-top",
+  "ltl-12": "object-cover object-top",
+};
+
 export default function ResourceCard({ resource, compact = false }: ResourceCardProps) {
   const hasLink = resource.url && resource.url !== "#" && resource.url.startsWith("http");
   const stripe = borderMap[resource.category] || "border-l-border";
@@ -80,12 +93,12 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
               alt=""
               loading="lazy"
               onError={handleImgError}
-              className="w-16 h-11 rounded-md object-cover shrink-0"
+              className={`w-16 h-11 rounded-md shrink-0 ${thumbFit[resource.id] || "object-cover"}`}
             />
           )}
 
           {/* Category badge — fixed width */}
-          <span className={`text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
+          <span className={`text-[0.6875rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
             {resource.category}
           </span>
 
@@ -95,7 +108,7 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
               <h3 className="font-serif text-sm text-foreground leading-tight truncate group-hover:text-terracotta transition-colors">
                 {resource.title}
               </h3>
-              <span className="text-[0.65rem] text-terracotta/60 shrink-0 hidden lg:inline">
+              <span className="text-[0.6875rem] text-terracotta/60 shrink-0 hidden lg:inline">
                 {resource.organization}
               </span>
             </div>
@@ -104,12 +117,12 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
           {/* Tags — inline */}
           <div className="flex items-center gap-1.5 shrink-0">
             {resource.gradeLevel && resource.gradeLevel !== "All" && (
-              <span className="text-[0.6rem] px-1.5 py-px rounded-full bg-sand text-soil font-medium">
+              <span className="text-[0.6875rem] px-1.5 py-px rounded-full bg-sand text-soil font-medium">
                 {resource.gradeLevel}
               </span>
             )}
             {resource.subject && resource.subject !== "All" && (
-              <span className="text-[0.6rem] px-1.5 py-px rounded-full bg-sage-light/50 text-sage font-medium hidden lg:inline-flex">
+              <span className="text-[0.6875rem] px-1.5 py-px rounded-full bg-sage-light/50 text-sage font-medium hidden lg:inline-flex">
                 {resource.subject}
               </span>
             )}
@@ -117,7 +130,7 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
 
           {/* Type badge */}
           <span
-            className={`inline-flex items-center gap-1 text-[0.6rem] font-semibold px-2 py-0.5 rounded-full shrink-0 ${type.badge}`}
+            className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold px-2 py-0.5 rounded-full shrink-0 ${type.badge}`}
             title={resource.resourceType}
           >
             {type.icon}
@@ -130,13 +143,13 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-terracotta hover:text-terracotta-light transition-colors shrink-0"
+              className="inline-flex p-[5px] -m-[5px] text-terracotta hover:text-terracotta-light transition-colors shrink-0"
               title="View Resource"
             >
               <ExternalLink size={14} />
             </a>
           ) : (
-            <span className="text-[0.6rem] text-muted-foreground/50 italic shrink-0">
+            <span className="text-[0.6875rem] text-muted-foreground/50 italic shrink-0">
               Partners only
             </span>
           )}
@@ -145,11 +158,11 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
         {/* Mobile: compact two-line layout */}
         <div className="md:hidden">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <span className={`text-[0.55rem] font-semibold uppercase tracking-wider px-1.5 py-px rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
+            <span className={`text-[0.6875rem] font-semibold uppercase tracking-wider px-1.5 py-px rounded-full shrink-0 ${getCategoryColor(resource.category)}`}>
               {resource.category}
             </span>
             <span
-              className={`inline-flex items-center gap-1 text-[0.55rem] font-semibold px-1.5 py-px rounded-full shrink-0 ${type.badge}`}
+              className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold px-1.5 py-px rounded-full shrink-0 ${type.badge}`}
               title={resource.resourceType}
             >
               {type.icon}
@@ -160,9 +173,9 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
           </h3>
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-1 flex-wrap">
-              <span className="text-[0.6rem] text-terracotta/70">{resource.organization}</span>
+              <span className="text-[0.6875rem] text-terracotta/70">{resource.organization}</span>
               {resource.gradeLevel && resource.gradeLevel !== "All" && (
-                <span className="text-[0.55rem] px-1.5 py-px rounded-full bg-sand text-soil font-medium">
+                <span className="text-[0.6875rem] px-1.5 py-px rounded-full bg-sand text-soil font-medium">
                   {resource.gradeLevel}
                 </span>
               )}
@@ -177,7 +190,7 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
                 <ExternalLink size={13} />
               </a>
             ) : (
-              <span className="text-[0.55rem] text-muted-foreground/50 italic shrink-0">
+              <span className="text-[0.6875rem] text-muted-foreground/50 italic shrink-0">
                 Partners
               </span>
             )}
@@ -200,18 +213,18 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
             alt=""
             loading="lazy"
             onError={handleImgError}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className={`w-full h-full ${thumbFit[resource.id] || "object-cover"} transition-transform duration-500 group-hover:scale-105`}
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-sand to-secondary" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-soil/60 via-transparent to-transparent" />
         {/* Category badge overlaid */}
-        <span className={`absolute bottom-2 left-3 text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm ${getCategoryColor(resource.category)}`}>
+        <span className={`absolute bottom-2 left-3 text-[0.6875rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm ${getCategoryColor(resource.category)}`}>
           {resource.category}
         </span>
         {resource.gradeLevel && resource.gradeLevel !== "All" && (
-          <span className="absolute bottom-2 right-3 text-[0.6rem] px-2 py-0.5 rounded-full bg-cream/90 text-soil font-semibold shadow-sm">
+          <span className="absolute bottom-2 right-3 text-[0.6875rem] px-2 py-0.5 rounded-full bg-cream/90 text-soil font-semibold shadow-sm">
             Grades {resource.gradeLevel}
           </span>
         )}
@@ -221,13 +234,13 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
         {/* Type badge row */}
         <div className="flex items-center justify-between gap-2">
           <span
-            className={`inline-flex items-center gap-1.5 text-[0.65rem] font-semibold px-2 py-0.5 rounded-full ${type.badge}`}
+            className={`inline-flex items-center gap-1.5 text-[0.6875rem] font-semibold px-2 py-0.5 rounded-full ${type.badge}`}
           >
             {type.icon}
             {resource.resourceType}
           </span>
           {resource.audience && resource.audience !== "Both" && (
-            <span className="text-[0.65rem] text-muted-foreground shrink-0">{resource.audience}</span>
+            <span className="text-[0.6875rem] text-muted-foreground shrink-0">{resource.audience}</span>
           )}
         </div>
 
@@ -249,12 +262,12 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
         {/* Tags row */}
         <div className="flex flex-wrap gap-1.5">
           {resource.subject && resource.subject !== "All" && (
-            <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-sage-light/50 text-sage font-medium">
+            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-sage-light/50 text-sage font-medium">
               {resource.subject}
             </span>
           )}
           {resource.focusArea && (
-            <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-turquoise-light/30 text-turquoise font-medium">
+            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-turquoise-light/30 text-turquoise font-medium">
               {resource.focusArea}
             </span>
           )}
@@ -275,7 +288,7 @@ export default function ResourceCard({ resource, compact = false }: ResourceCard
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-light transition-colors no-underline group/link"
+              className="inline-flex items-center gap-1.5 py-0.5 -my-0.5 text-sm font-medium text-terracotta hover:text-terracotta-light transition-colors no-underline group/link"
             >
               View Resource
               <ExternalLink size={13} className="transition-transform group-hover/link:translate-x-0.5" />

@@ -22,7 +22,7 @@ export default function Footer() {
                 <span className="font-serif text-xl text-soil tracking-tight block">
                   SeedKeeper
                 </span>
-                <span className="text-[0.62rem] tracking-[0.18em] uppercase text-soil-light/80">
+                <span className="text-[0.6875rem] tracking-[0.18em] uppercase text-soil-light/80">
                   Cultivating Seeds of Knowledge
                 </span>
               </div>

@@ -284,7 +284,7 @@ export default function Resources() {
               <div className="absolute inset-0 bg-gradient-to-br from-terracotta to-[oklch(0.42_0.12_40)]" />
               <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
                 <span className="text-[0.7rem] font-semibold text-cream leading-tight">All Resources</span>
-                <span className="text-[0.6rem] text-cream/60">{categoryCounts["All"]} results</span>
+                <span className="text-[0.6875rem] text-cream/60">{categoryCounts["All"]} results</span>
               </div>
               {selectedCategory === "All" && <ActiveDot />}
             </button>
@@ -305,7 +305,7 @@ export default function Resources() {
                 <div className="absolute inset-0 bg-gradient-to-t from-soil/85 via-soil/20 to-transparent" />
                 <div className="absolute inset-0 p-2.5 flex flex-col justify-end">
                   <span className="text-[0.7rem] font-semibold text-cream leading-tight">{cat.name}</span>
-                  <span className="text-[0.6rem] text-cream/60">{categoryCounts[cat.name] || 0} resources</span>
+                  <span className="text-[0.6875rem] text-cream/60">{categoryCounts[cat.name] || 0} resources</span>
                 </div>
                 {selectedCategory === cat.name && <ActiveDot />}
               </button>
@@ -331,7 +331,7 @@ export default function Resources() {
             <SlidersHorizontal size={14} />
             Filters
             {activeFilterCount > 0 && (
-              <span className="bg-terracotta text-white rounded-full px-1.5 py-px text-[0.6rem]">{activeFilterCount}</span>
+              <span className="bg-terracotta text-white rounded-full px-1.5 py-px text-[0.6875rem]">{activeFilterCount}</span>
             )}
           </button>
           <div className="relative flex-1">
@@ -410,7 +410,7 @@ export default function Resources() {
               />
               {/* View Toggle — desktop only; mobile has one beside the category dropdown */}
               <div className="hidden md:flex flex-col gap-0.5">
-                <label className="text-[0.55rem] font-semibold uppercase tracking-widest text-muted-foreground/70 text-center">View</label>
+                <label className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground/70 text-center">View</label>
                 <div className="flex border border-border rounded-lg overflow-hidden">
                   <button
                     onClick={() => setViewMode("list")}
@@ -534,7 +534,7 @@ export default function Resources() {
 
 function ActiveDot() {
   return (
-    <span className="absolute top-2 right-2 bg-terracotta text-white text-[0.55rem] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide shadow">
+    <span className="absolute top-2 right-2 bg-terracotta text-white text-[0.6875rem] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide shadow">
       Active
     </span>
   );
@@ -557,7 +557,7 @@ function CompactSelect({
 }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <label className="text-[0.55rem] font-semibold uppercase tracking-widest text-muted-foreground/70 text-center">
+      <label className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground/70 text-center">
         {label}
       </label>
       <div className="relative">

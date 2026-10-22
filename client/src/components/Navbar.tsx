@@ -54,7 +54,7 @@ export default function Navbar() {
             <span className="font-serif text-[1.35rem] md:text-[1.6rem] text-soil tracking-tight leading-tight">
               SeedKeeper
             </span>
-            <span className="text-[0.62rem] md:text-[0.68rem] tracking-[0.18em] uppercase text-soil-light/80 leading-snug">
+            <span className="text-[0.6875rem] tracking-[0.18em] uppercase text-soil-light/80 leading-snug">
               Cultivating Seeds of Knowledge
             </span>
           </div>

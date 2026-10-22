@@ -43,11 +43,11 @@ function VideoCard({ resource, index }: { resource: Resource; index: number }) {
       {/* Body */}
       <div className="p-4 md:p-5 flex flex-col gap-2 flex-1">
         <div className="flex items-center justify-between gap-2">
-          <span className={`text-[0.6rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${getCategoryColor(resource.category)}`}>
+          <span className={`text-[0.6875rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${getCategoryColor(resource.category)}`}>
             {resource.category}
           </span>
           {resource.gradeLevel && resource.gradeLevel !== "All" && (
-            <span className="text-[0.65rem] px-2 py-0.5 rounded-full bg-sand text-soil font-medium shrink-0">
+            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-sand text-soil font-medium shrink-0">
               Grades {resource.gradeLevel}
             </span>
           )}
@@ -64,7 +64,7 @@ function VideoCard({ resource, index }: { resource: Resource; index: number }) {
             href={resource.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-turquoise hover:text-terracotta transition-colors no-underline"
+            className="inline-flex items-center gap-1.5 py-0.5 -my-0.5 text-sm font-medium text-turquoise hover:text-terracotta transition-colors no-underline"
           >
             Open on YouTube
             <ExternalLink size={13} />
@@ -157,7 +157,7 @@ export default function Videos() {
                   }`}
                 >
                   {c === "All" ? "All Topics" : c}
-                  <span className={`text-[0.65rem] lg:text-xs tabular-nums ${active ? "text-white/70" : "text-muted-foreground/50"}`}>
+                  <span className={`text-[0.6875rem] lg:text-xs tabular-nums ${active ? "text-white/70" : "text-muted-foreground/50"}`}>
                     {n}
                   </span>
                 </button>

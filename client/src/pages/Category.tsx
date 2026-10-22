@@ -63,7 +63,7 @@ export default function Category() {
           <div className="container pb-8 md:pb-10">
             <Link
               href="/resources"
-              className="inline-flex items-center gap-1.5 text-cream/60 text-sm mb-3 hover:text-cream transition-colors no-underline"
+              className="inline-flex items-center gap-1.5 py-0.5 -my-0.5 text-cream/60 text-sm mb-3 hover:text-cream transition-colors no-underline"
             >
               <ArrowLeft size={14} /> All Resources
             </Link>
