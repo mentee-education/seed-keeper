@@ -62,7 +62,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "wouter": "^3.3.5",
-    "zod": "^4.1.12"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
@@ -155,7 +155,8 @@
       "@vitest/mocker@<4.1.12": "^4.1.12",
       "postcss-selector-parser@<7.1.6": "^7.1.6",
       "tinypool@<2.1.2": "^2.1.2",
-      "vite>esbuild": "0.27.7"
+      "vite>esbuild": "0.27.7",
+      "zod@>=4.0.0 <4.6.6": "^4.6.7"
     }
   }
 }
