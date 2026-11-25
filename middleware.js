@@ -12,6 +12,32 @@ async function token() {
   return [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+// Leading-dot paths (/.env, /.git/config) must 404. There is no SPA rewrite in
+// vercel.json; unknown URLs fall through to dist/404.html, which is a copy of
+// index.html. This runs before the password gate so those paths are not the
+// login page and are not the app shell. App routes and the POST / login are unchanged.
+function isLeadingDotPath(pathname) {
+  let path = pathname || "/";
+  try {
+    path = decodeURIComponent(path);
+  } catch {
+    // Malformed percent-encoding stays as written.
+  }
+  const first = path.split("/").filter((segment) => segment.length > 0)[0] || "";
+  return first.startsWith(".");
+}
+
+function dotPathNotFound() {
+  return new Response("Not Found", {
+    status: 404,
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "no-store",
+      "x-robots-tag": "noindex, nofollow",
+    },
+  });
+}
+
 function loginPage(status = 401, message = "") {
   return new Response(
     `<!doctype html>
@@ -46,6 +72,7 @@ async function hasCookie(request) {
 }
 
 export default async function middleware(request) {
+  if (isLeadingDotPath(new URL(request.url).pathname)) return dotPathNotFound();
   if (await hasCookie(request)) return next();
   if (request.method !== "POST") return loginPage();
 
